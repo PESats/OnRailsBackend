@@ -33,11 +33,15 @@ class UserTest < ActiveSupport::TestCase
   
   test "user login" do
     user = correct_user
-    user.save
-    
+    user.login "correct_token"
+    assert user.isLoggedIn?
   end
   
   test "user logout" do
+    user = correct_user
+    user.login "correct_token"
+    user.logout
+    assert_not user.isLoggedIn?
   end
   
   # TODO: User name test

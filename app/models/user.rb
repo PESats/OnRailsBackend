@@ -14,5 +14,9 @@ class User < ApplicationRecord
   def logout
     update_attributes(active_token: nil)
   end
+  
+  def isLoggedIn?
+    active_token != nil
+  end
 
 end
