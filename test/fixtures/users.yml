@@ -1,10 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  image_url: MyString
-  platform_name: MyString
-  active_token: MyString
+  name: TestUser1
+  image_url: dummy_image
+  platform_name: Facebook
+  email: yolo@example.com
+  active_token: 1234
 
 two:
   name: MyString
