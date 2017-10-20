@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include ActionController::MimeResponds
 
   #protect_from_forgery with: :exception , unless: -> { valid_active_token  }
 
