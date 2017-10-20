@@ -8,7 +8,7 @@ class ActiveSupport::TestCase
   fixtures :all
   
   def correct_user
-    User.new(name: "Lone Wolf", platform_name: "Google", email: "dude@example.com", active_token: "1234")
+    users(:one)
   end
   
 end
