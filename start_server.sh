@@ -2,6 +2,8 @@
 
 source /home/alumne/.rvm/scripts/rvm
 
-git pull origin develop
+git pull 
+
+bundle install
 
 bin/rails server
