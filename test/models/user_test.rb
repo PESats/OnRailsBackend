@@ -18,12 +18,6 @@ class UserTest < ActiveSupport::TestCase
     user.platform_name = "Reddit"
     assert_not user.save, "An user from an account different from FB, Google or Twitter has been saved"
   end
-
-  test "users must have a token" do
-    user = correct_user
-    user.active_token = nil
-    assert_not user.save, "An user with no active_token has been saved"
-  end
   
   test "users must have an email" do
     user = correct_user
@@ -31,15 +25,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.save, "An user with no email has been saved"
   end
   
-  test "user login" do
-    user = correct_user
-    user.login "correct_token"
+  test "user login and logout" do
+    user = users(:one)
+    assert_not user.isLoggedIn?
+    
+    user.login "valid_token"
     assert user.isLoggedIn?
-  end
-  
-  test "user logout" do
-    user = correct_user
-    user.login "correct_token"
+    
     user.logout
     assert_not user.isLoggedIn?
   end

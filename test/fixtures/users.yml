@@ -5,7 +5,6 @@ one:
   image_url: dummy_image
   platform_name: Facebook
   email: yolo@example.com
-  active_token: 1234
 
 two:
   name: MyString

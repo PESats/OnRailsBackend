@@ -4,7 +4,6 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :platform_name, presence: true, inclusion: %w(Twitter Facebook Google)
   validates :email, presence: true
-  validates :active_token, presence: true
   
   
   def login (token)

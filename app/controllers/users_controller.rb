@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :find_user, only: [:show, :edit, :update, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :destroy, :login, :logout]
 
   def index
     render json: User.all
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       # Login
       @user.login params[:active_token]
       render json: @user
-    else 
+    else
       #create user
       @user = User.new user_params
       if @user.save
@@ -42,9 +42,11 @@ class UsersController < ApplicationController
   
   # TODO:
   def login
+    @user.login params[:active_token]
   end
   
   def logout
+    @user.logout
   end
 
   private
@@ -53,8 +55,6 @@ class UsersController < ApplicationController
   def user_params
     params.permit(:id, :name, :image_url, :platform_name, :email, :active_token)
   end
-
-  #TODO escollir un dels metodes per la instancia d'usuari actual
 
   def find_user
     @user = User.find_by(email: params[:email], platform_name: params[:platform_name])
