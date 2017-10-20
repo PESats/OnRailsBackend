@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
 
   def index
     render json: User.all
@@ -12,12 +12,25 @@ class UsersController < ApplicationController
 
 
   def create
-    @user = User.new(user_params)
-    respond_to do |format|
+    #@user = User.new(user_params)
+    #respond_to do |format|
+    #  if @user.save
+    #    format.json { render json: @user.as_json(root: false, only: [:active_token]) , status: :created }
+    #  else
+    #    format.json { render json: @user.errors, status: :unprocessable_entity }
+    #  end
+    #end
+    
+    if find_user
+      # Login
+      render json: @user
+    else 
+      #create user
+      @user = User.new user_params
       if @user.save
-        format.json { render json: @user.as_json(root: false, only: [:active_token]) , status: :created }
+        render json: @user
       else
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        render json: @user.errors.full_messages
       end
     end
     
@@ -52,13 +65,13 @@ class UsersController < ApplicationController
 ################################################################################
 
   def user_params
-    params.permit(:id, :name, :image_url, :platform_name)
+    params.permit(:id, :name, :image_url, :platform_name, :email)
   end
 
   #TODO escollir un dels metodes per la instancia d'usuari actual
 
-  def set_user
-      @user = User.find(params[:id])
+  def find_user
+    @user = User.find_by(email: params[:email], platform_name: params[:platform_name])
   end
 
 end
