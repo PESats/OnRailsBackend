@@ -12,14 +12,6 @@ class UsersController < ApplicationController
 
 
   def create
-    #@user = User.new(user_params)
-    #respond_to do |format|
-    #  if @user.save
-    #    format.json { render json: @user.as_json(root: false, only: [:active_token]) , status: :created }
-    #  else
-    #    format.json { render json: @user.errors, status: :unprocessable_entity }
-    #  end
-    #end
     
     if find_user
       # Login
@@ -30,7 +22,7 @@ class UsersController < ApplicationController
       if @user.save
         render json: @user
       else
-        render json: @user.errors.full_messages
+        render json: @user.errors.full_messages, status: 400
       end
     end
     
@@ -47,10 +39,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-    end
   end
   
   
