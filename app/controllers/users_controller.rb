@@ -10,11 +10,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-
   def create
-    
     if find_user
       # Login
+      @user.login params[:active_token]
       render json: @user
     else 
       #create user
@@ -25,7 +24,6 @@ class UsersController < ApplicationController
         render json: @user.errors.full_messages, status: 400
       end
     end
-    
   end
 
   def show
@@ -53,7 +51,7 @@ class UsersController < ApplicationController
 ################################################################################
 
   def user_params
-    params.permit(:id, :name, :image_url, :platform_name, :email)
+    params.permit(:id, :name, :image_url, :platform_name, :email, :active_token)
   end
 
   #TODO escollir un dels metodes per la instancia d'usuari actual
