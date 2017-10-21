@@ -6,8 +6,8 @@ class User < ApplicationRecord
   validates :email, presence: true
   
   
-  def login (token)
-    update_attributes(active_token: token)
+  def login
+    regenerate_active_token
   end
   
   def logout

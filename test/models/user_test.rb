@@ -29,7 +29,7 @@ class UserTest < ActiveSupport::TestCase
     user = users(:one)
     assert_not user.isLoggedIn?
     
-    user.login "valid_token"
+    user.login
     assert user.isLoggedIn?
     
     user.logout

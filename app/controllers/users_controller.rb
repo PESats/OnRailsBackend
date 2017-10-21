@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def create
     if find_user
       # Login
-      @user.login params[:active_token]
+      @user.login
       render json: @user
     else
       #create user
@@ -40,9 +40,20 @@ class UsersController < ApplicationController
   end
   
   
-  # TODO:
   def login
-    @user.login params[:active_token]
+    if find_user
+      # Login
+      @user.login
+      render json: @user
+    else
+      #create user
+      @user = User.new user_params
+      if @user.save
+        render json: @user
+      else
+        render json: @user.errors.full_messages, status: 400
+      end
+    end
   end
   
   def logout
