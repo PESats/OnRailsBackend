@@ -1,10 +1,9 @@
 class User < ApplicationRecord
   
   has_secure_token :active_token
-  validates :name, presence: true
+  #validates :name, presence: true
   validates :platform_name, presence: true, inclusion: %w(Twitter Facebook Google)
   validates :email, presence: true
-  
   
   def login
     regenerate_active_token
@@ -16,6 +15,10 @@ class User < ApplicationRecord
   
   def isLoggedIn?
     active_token != nil
+  end
+  
+  def valid_token? (token)
+    token == active_token
   end
 
 end
