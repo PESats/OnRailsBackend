@@ -1,16 +1,22 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
 
-  before_action  :valid_active_token, only: [:show, :edit, :update, :destroy]
+  before_action :validate_token, only: [:show, :edit, :update, :destroy]
 
-  def valid_active_token
+  def validate_token
     p "Validating Token"
     token = params[:active_token]
-    p token
+    id = params[:id]
     
     if token
       p "API Key succesfully validated"
-      return User.exists?(active_token: token)
+      if User.exists?(id: id, active_token: token)
+        p "Correct token"
+        true
+      else
+        p "Invalid token"
+        false
+      end
     else
       p "API KEY not found"
       return false
