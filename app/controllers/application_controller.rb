@@ -5,12 +5,12 @@ class ApplicationController < ActionController::API
 
   def valid_active_token
     p "Validating Token"
-    p "Params: #{request.headers.to_s}"
-    atoken = request.headers[:active_token]
-
-    if atoken
+    token = params[:active_token]
+    p token
+    
+    if token
       p "API Key succesfully validated"
-      return User.exists?(active_token: atoken)
+      return User.exists?(active_token: token)
     else
       p "API KEY not found"
       return false
