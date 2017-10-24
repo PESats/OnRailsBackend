@@ -8,18 +8,11 @@ class ApplicationController < ActionController::API
     token = params[:active_token]
     id = params[:id]
     
-    if token
-      p "API Key succesfully validated"
-      if User.exists?(id: id, active_token: token)
-        p "Correct token"
-        true
-      else
-        p "Invalid token"
-        false
-      end
+    if token && User.exists?(id: id, active_token: token)
+      p "Correct token"
     else
-      p "API KEY not found"
-      return false
+      p "Invalid token"
+      render json: {error: "Invalid token" }, status: 400
     end
   end
 end
