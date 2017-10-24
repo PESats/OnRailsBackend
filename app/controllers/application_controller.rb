@@ -1,11 +1,12 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
 
-  #protect_from_forgery with: :exception , unless: -> { valid_active_token  }
+  before_action  :valid_active_token, only: [:show, :edit, :update, :destroy]
 
   def valid_active_token
     p "Validating Token"
-    atoken = request.query_parameters['active_token']
+    p "Params: #{request.headers.to_s}"
+    atoken = request.headers[:active_token]
 
     if atoken
       p "API Key succesfully validated"
