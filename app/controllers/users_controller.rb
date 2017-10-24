@@ -7,19 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    if @user = User.find_by(email: params[:email], platform_name: params[:platform_name])
-      # Login
-      @user.login
-      render json: @user
-    else
-      #create user
-      @user = User.new user_params
-      if @user.save
-        render json: @user
-      else
-        render json: @user.errors.full_messages, status: 400
-      end
-    end
+    login
   end
 
   def show
