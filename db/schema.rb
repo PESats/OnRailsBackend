@@ -10,7 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020123135) do
+ActiveRecord::Schema.define(version: 20171102161416) do
+
+  create_table "anuncis", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.integer "reward"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_anuncis_on_user_id"
+  end
+
+  create_table "comentaris", force: :cascade do |t|
+    t.text "text"
+    t.integer "user_id"
+    t.integer "anunci_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["anunci_id"], name: "index_comentaris_on_anunci_id"
+    t.index ["user_id"], name: "index_comentaris_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"

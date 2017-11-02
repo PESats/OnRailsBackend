@@ -6,9 +6,10 @@ Minitest::Reporters.use!
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
-  
+
   def correct_user
     users(:one)
   end
-  
+
+
 end
