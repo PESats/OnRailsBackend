@@ -1,29 +1,32 @@
 require 'test_helper'
 
 class AnuncisControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get anuncis_index_url
-    assert_response :success
+  
+  test "get anunci correct token" do
+    anunci = correct_anunci
+    user = correct_user
+    
+    user.login
+    user = user.reload
+    
+    get anunci_path(anunci), params: { 
+      user: { id: user.id, active_token: user.active_token },
+      anunci: { id: anunci.id }
+    }
+    assert_equal "200", response.code
+    #assert_equal anunci, response.body[:anunci]
   end
-
-  test "should get create" do
-    get anuncis_create_url
-    assert_response :success
+  
+  test "get anuncis index" do
   end
-
-  test "should get show" do
-    get anuncis_show_url
-    assert_response :success
+  
+  test "post anunci" do
   end
-
-  test "should get update" do
-    get anuncis_update_url
-    assert_response :success
+  
+  test "update anunci" do
   end
-
-  test "should get destroy" do
-    get anuncis_destroy_url
-    assert_response :success
+  
+  test "delete anunci" do
   end
-
+  
 end

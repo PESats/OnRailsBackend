@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
+  title: Vendo Opel corsa
+  description: Vendo opel corsa seminuevo porque necesito el dinero pa porros.
   latitude: 9.99
   longitude: 9.99
-  reward: 1
+  reward: 4
 
 two:
-  title: MyString
-  description: MyText
-  latitude: 9.99
-  longitude: 9.99
-  reward: 1
+  title: Vendo coche marronero
+  description: Vendo coche marronero siempre que lo cojo me pilla la guardia civil ahora voy preso si alguien lo quiere que venga a alahurin a firmar el contrato de compra y venta.
+  latitude: 5.99
+  longitude: 5.99
+  reward: 3

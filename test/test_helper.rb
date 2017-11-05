@@ -11,5 +11,8 @@ class ActiveSupport::TestCase
     users(:one)
   end
 
+  def correct_anunci
+    anuncis(:one)
+  end
 
 end
