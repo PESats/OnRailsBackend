@@ -8,6 +8,13 @@ class AnuncisController < ApplicationController
   end
 
   def create
+    @anunci = @user.anuncis.new anunci_params
+    if @anunci.save
+      render json: @anunci
+    else
+      p @anunci.errors.full_messages
+      render json: @anunci.errors.full_messages, status: 400
+    end
   end
 
   def show
@@ -24,7 +31,7 @@ class AnuncisController < ApplicationController
 ################################################################################
   
   def anunci_params
-    
+    params.require(:anunci).permit(:title, :description, :latitude, :longitude, :reward)
   end
   
   def find_user
