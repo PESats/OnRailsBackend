@@ -12,9 +12,12 @@ gem 'rails', '~> 5.1.4'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
+# Test coloritos
 gem 'minitest-reporters'
-
+# UML generator
 gem 'railroady'
+# Fake data
+gem 'faker'
 
 group :development, :test do
   gem 'sqlite3'
