@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171103113727) do
+ActiveRecord::Schema.define(version: 20171107121736) do
 
   create_table "anuncis", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.decimal "latitude"
-    t.decimal "longitude"
+    t.float "latitude"
+    t.float "longitude"
     t.integer "reward"
     t.integer "user_id"
     t.datetime "created_at", null: false
