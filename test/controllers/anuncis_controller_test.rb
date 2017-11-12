@@ -69,6 +69,16 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
   end
   
   test "delete anunci" do
+    anunci = correct_anunci
+    user = correct_user
+    user.login
+    
+    delete anunci_path(anunci.id), params: {
+      user_id: user.id,
+      active_token: user.active_token
+    }
+    
+    assert_not Anunci.exists?(anunci.id)
   end
   
 end
