@@ -22,6 +22,13 @@ class AnuncisController < ApplicationController
   end
 
   def update
+    if @anunci.update_attributes anunci_params
+      #p "Sucess!"
+      render json: @anunci
+    else
+      #p "Fail!"
+      render json: @anunci.errors.full_messages, status: 400
+    end
   end
 
   def destroy

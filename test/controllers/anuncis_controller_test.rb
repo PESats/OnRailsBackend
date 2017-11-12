@@ -70,6 +70,8 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
     user = correct_user
     user.login
     
+    last_update = anunci.updated_at
+    
     put anunci_path(anunci.id), params: {
       anunci: {
         title: "Modified Title",
@@ -82,7 +84,7 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
       active_token: user.active_token
     }
     
-    assert_not_equal anunci.updated_at, anunci.reload.updated_at
+    assert_not_equal last_update, anunci.reload.updated_at
   end
   
   test "delete anunci" do

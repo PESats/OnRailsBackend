@@ -7,6 +7,7 @@ one:
   latitude: 9.99
   longitude: 9.99
   reward: 4
+  user_id: 1
 
 two:
   id: 2
@@ -15,3 +16,4 @@ two:
   latitude: 5.99
   longitude: 5.99
   reward: 3
+  user_id: 2
