@@ -66,6 +66,23 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
   end
   
   test "update anunci" do
+    anunci = correct_anunci
+    user = correct_user
+    user.login
+    
+    put anunci_path(anunci.id), params: {
+      anunci: {
+        title: "Modified Title",
+        description: "Modified description bla bla bla",
+        latitude: 2.2,
+        longitude: 1.1,
+        reward: 1
+      },
+      user_id: user.id,
+      active_token: user.active_token
+    }
+    
+    assert_not_equal anunci.updated_at, anunci.reload.updated_at
   end
   
   test "delete anunci" do
