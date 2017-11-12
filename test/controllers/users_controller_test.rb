@@ -11,13 +11,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     
     post users_login_path, params:{ 
       user: { email: user.email, 
-              platform_name: user.platform_name
+              platform_name: user.platform_name,
+              name: user.name
       }
     }
     assert user.reload.isLoggedIn?
     
-    post users_logout_path, params:{ 
-      user: { id: user.id, active_token: user.active_token} }
+    post users_logout_path, params:{
+      user_id: user.id, active_token: user.active_token
+    }
     assert_not user.reload.isLoggedIn?
   end
 

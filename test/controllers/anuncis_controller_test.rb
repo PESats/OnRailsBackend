@@ -9,9 +9,9 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
     user.login
     user = user.reload
     
-    get anunci_path(anunci), params: {
-      user: { id: user.id, active_token: user.active_token },
-      anunci: { id: anunci.id }
+    get anunci_path(anunci.id), params: {
+      user_id: user.id,
+      active_token: user.active_token,
     }
     
     assert_equal "200",              response.code
@@ -45,7 +45,7 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
         longitude: longitude,
         reward: reward
       },
-      user: { id: user.id, active_token: user.active_token }
+      user_id: user.id, active_token: user.active_token
     }
     
     anunci = user.reload.anuncis.last

@@ -5,8 +5,8 @@ class ApplicationController < ActionController::API
 
   def validate_token
     #p "Validating Token"
-    token = params[:user][:active_token]
-    id = params[:user][:id]
+    token = params[:active_token]
+    id = params[:user_id]
     
     if token && User.exists?(id: id, active_token: token)
       #p "Correct token"

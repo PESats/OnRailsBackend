@@ -34,16 +34,12 @@ class AnuncisController < ApplicationController
     params.require(:anunci).permit(:title, :description, :latitude, :longitude, :reward)
   end
   
-  def user_params
-    params.permit(:id, :active_token)
-  end
-  
   def find_user
-    @user = User.find user_params[:id]
+    @user = User.find params[:user_id]
   end
   
   def find_anunci
-    @anunci = Anunci.find anunci_params[:id]
+    @anunci = Anunci.find params[:id]
   end
   
 end

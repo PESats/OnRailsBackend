@@ -2,9 +2,9 @@ class UsersController < ApplicationController
 
   before_action :find_user, only: [:show, :edit, :update, :destroy, :logout]
 
-  #def index
-  #  render json: User.all
-  #end
+  def index
+    render json: User.all
+  end
 
   def create
     login
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   #end
   
   def login
-    p  user_params
+    #p  user_params
     if @user = User.find_by(email: user_params[:email], platform_name: user_params[:platform_name])
       # Login
       @user.login
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   end
 
   def find_user
-    @user = User.find(user_params[:id])
+    @user = User.find(params[:user_id])
   end
 
 end
