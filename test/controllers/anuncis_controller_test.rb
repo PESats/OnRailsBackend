@@ -5,9 +5,7 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
   test "get anunci correct token" do
     anunci = correct_anunci
     user = correct_user
-    
     user.login
-    user = user.reload
     
     get anunci_path(anunci.id), params: {
       user_id: user.id,
@@ -24,6 +22,15 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
   end
   
   test "get anuncis index" do
+    user = correct_user
+    user.login
+    
+    get anuncis_path, params: {
+      user_id: user.id,
+      active_token: user.active_token,
+    }
+    
+    assert_equal "200", response.code
   end
   
   test "create anunci" do
