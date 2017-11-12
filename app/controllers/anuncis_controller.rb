@@ -25,6 +25,7 @@ class AnuncisController < ApplicationController
   end
 
   def destroy
+    @anunci.destroy
   end
   
   private
