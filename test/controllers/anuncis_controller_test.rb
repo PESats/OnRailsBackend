@@ -84,6 +84,7 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
       active_token: user.active_token
     }
     
+    assert_equal "200", response.code
     assert_not_equal last_update, anunci.reload.updated_at
   end
   
