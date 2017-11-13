@@ -13,7 +13,6 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert_equal "200",              response.code
-    
     assert_match anunci.title,       response.body
     assert_match anunci.description, response.body
     #assert_match anunci.latitude,    response.body
@@ -57,6 +56,7 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
     
     anunci = user.reload.anuncis.last
     
+    assert_equal "200", response.code
     assert_equal title,       anunci.title
     assert_equal description, anunci.description
     assert_equal latitude,    anunci.latitude
@@ -98,6 +98,7 @@ class AnuncisControllerTest < ActionDispatch::IntegrationTest
       active_token: user.active_token
     }
     
+    assert_equal "204", response.code
     assert_not Anunci.exists?(anunci.id)
   end
   
