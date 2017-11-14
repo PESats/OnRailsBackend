@@ -3,7 +3,6 @@ require 'test_helper'
 class ComentarisControllerTest < ActionDispatch::IntegrationTest
     
     test "create new comentari" do
-        
         user = correct_user
         user.login
         user.reload
@@ -17,9 +16,9 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
                 longitude: anun.longitude,
                 reward: anun.reward
             },
-            user: { id: user.id, active_token: user.active_token }
+            user_id: user.id, active_token: user.active_token
         }
-        assert_equal "200",              response.code
+        assert_equal "200", response.code
     
         anun = user.reload.anuncis.last
         
@@ -34,8 +33,6 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
         comm = user.reload.comentaris.last
         
         assert_equal "Hello World", comm.text
-        
-        
     end
-
+    
 end
