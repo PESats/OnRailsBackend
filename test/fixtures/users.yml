@@ -9,7 +9,7 @@ one:
 
 two:
   id: 2
-  name: MyString
-  image_url: MyString
-  platform_name: MyString
-  active_token: MyString
+  name: TestUser2
+  image_url: dummy_man
+  platform_name: Google
+  email: tutu@example.com

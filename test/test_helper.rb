@@ -11,8 +11,30 @@ class ActiveSupport::TestCase
     users(:one)
   end
 
+  def correct_user2
+    users(:two)
+  end
+
   def correct_anunci
     anuncis(:one)
+  end
+
+
+
+  def correct_comment
+    comentaris(:one)
+  end
+
+  def correct_comment2
+    comentaris(:two)
+  end
+
+  def correct_commentf2t1
+    comentaris(:three)
+  end
+
+  def correct_commentf1t2
+    comentaris(:four)
   end
 
 end
