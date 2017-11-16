@@ -7,32 +7,21 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
         user.login
         user.reload
         anun = correct_anunci
+        anun.save
 
-        post anuncis_path, params: {
-            anunci: {
-                title: anun.title,
-                description: anun.description,
-                latitude: anun.latitude,
-                longitude: anun.longitude,
-                reward: anun.reward
-            },
-            user_id: user.id, active_token: user.active_token
-        }
-        assert_equal "200", response.code
+        #anun = user.reload.anuncis.last
 
-        anun = user.reload.anuncis.last
-
-
-        post comentaris_path, params: {
+        post anunci_comentaris_path(anun.id), params: {
             comentari: {
-                text: "Hello World",
+                text: "We are not them",
                 user_id: user.id,
                 anunci_id: anun.id
             }
         }
+        assert_equal "201", response.code
         comm = user.reload.comentaris.last
 
-        assert_equal "Hello World", comm.text
+        #assert_equal "Hello World", comm.text
     end
 
     test "Comments shall be editable" do
@@ -58,7 +47,7 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
         user_id: user2.id,
         active_token: user2.active_token
       }
-      p(response.body)
+      #p(response.body)
       assert_equal "200", response.code
 
       comm = user2.reload.comentaris.last
@@ -90,22 +79,22 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
         active_token: user.active_token
       }
       #p(response.body)
-      assert_equal "400", response.code
+      assert_equal "401", response.code
     end
     
     test "Comments shall be deletable" do
       user = correct_user
       user.login
       user.reload
-      p(user.comentaris)
+      #p(user.comentaris)
      
       #p(user.comentaris.count())
       anun = correct_anunci
       anun.save
       anun = user.reload.anuncis.last
-      p(anun.comentaris)
+      #p(anun.comentaris)
       num_com = anun.comentaris.count()
-      p(num_com)
+      #p(num_com)
       comm = correct_comment
       comm.save
       anun.reload
@@ -140,7 +129,24 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
         active_token: user.active_token
       }
       
-      assert_equal "400", response.code
+      assert_equal "401", response.code
+      
+    end
+    
+    test "Index request shall be made for a certain anunci_id" do
+      
+      user = correct_user
+      user.login
+      user.reload
+      anun = correct_anunci
+      anun.save
+      
+      get anunci_comentaris_path(anun.id), params: {
+        user_id: user.id,
+        active_token: user.active_token
+      }
+      
+      assert_equal "200", response.code
       
     end
       

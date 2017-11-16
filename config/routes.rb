@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
 
  resources :users
- resources :anuncis
+ resources :anuncis do
+  resources :comentaris, only: [:index,:create]
+ end
  resources :comentaris
  
  post '/users/login/', to: 'users#login'
  post '/users/logout/', to: 'users#logout'
  
+ #get '/anuncis/:anunci_id/comentaris', to: 'comentaris#index', as: 'anunci_comentaris'
+
  # en comptes de resources :comentaris, seria millor:
  #resources :anuncis do
   #resources :comentaris, only[:index,:create,:update,:destroy]
