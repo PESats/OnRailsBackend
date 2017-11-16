@@ -92,5 +92,63 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
       #p(response.body)
       assert_equal "400", response.code
     end
+    
+    test "Comments shall be deletable" do
+      user = correct_user
+      user.login
+      user.reload
+      p(user.comentaris)
+     
+      #p(user.comentaris.count())
+      anun = correct_anunci
+      anun.save
+      anun = user.reload.anuncis.last
+      p(anun.comentaris)
+      num_com = anun.comentaris.count()
+      p(num_com)
+      comm = correct_comment
+      comm.save
+      anun.reload
+      
+      
+      delete comentari_path(comm.id), params: {
+        user_id: user.id,
+        active_token: user.active_token
+      }
+      assert_equal "204", response.code
+      assert_equal 0, Comentari.where(id: comm.id).count, "Comment wasn't deleted " 
+    end
+    
+    test "Comments can only be deleted by its owner" do
+      user = correct_user
+      user.login
+      user.reload
+      anun = correct_anunci
+      anun.save
+      anun = user.reload.anuncis.last
+
+      user2 = correct_user2
+      user2.login
+      user2.reload
+
+      comm = correct_commentf2t1
+      comm.save
+      anun.reload
+      
+      delete comentari_path(comm.id), params: {
+        user_id: user.id,
+        active_token: user.active_token
+      }
+      
+      assert_equal "400", response.code
+      
+    end
+      
+      
+      
+      
+      
+      
+    
 
 end

@@ -32,6 +32,7 @@ class ComentarisController < ApplicationController
   end
 
   def destroy
+    @comentari.destroy
   end
 
   private
