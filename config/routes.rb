@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
  resources :users
  resources :anuncis do
-  resources :comentaris, only: [:index,:create]
+  resources :comentaris, only: [:index,:create,:update,:destroy]
  end
  resources :comentaris
  

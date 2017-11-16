@@ -6,15 +6,19 @@ class ComentarisController < ApplicationController
   def index
     #comentaris = Comentari.where('anunci')
     @anunci = Anunci.find(params[:anunci_id])
-    render json: @anunci.comentaris.order(:created_at, :updated_at)
+    render json: @anunci.comentaris.order(:created_at, :updated_at), root: false
   end
 
   def create
+    #p(params)
     @anunci = Anunci.find(params[:anunci_id])
-    @user = User.find(params[:comentari][:user_id])
-    @comentari = @anunci.comentaris.create(comentari_params)
+    @user = User.find(params[:user_id])
+    #p(comentari_params)
+    @comentari = @anunci.comentaris.new(comentari_params)
+    @comentari.user = @user
+    
     if @comentari.save
-      @user.comentaris << @comentari
+      #@user.comentaris << @comentari
       render json: @comentari, status: :created
     else
       render json: @comentari.errors.full_message, status: 400
@@ -41,7 +45,7 @@ class ComentarisController < ApplicationController
   private
 ################################################################################
   def comentari_params
-    params.require(:comentari).permit(:text, :user_id, :anunci_id)
+    params.require(:comentari).permit(:text, :reward)
   end
 
   def find_comentari

@@ -5,18 +5,21 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
     test "create new comentari" do
         user = correct_user
         user.login
-        user.reload
+        #user.reload
         anun = correct_anunci
-        anun.save
+        #anun.save
 
         #anun = user.reload.anuncis.last
 
         post anunci_comentaris_path(anun.id), params: {
             comentari: {
                 text: "We are not them",
+                reward: 20,
                 user_id: user.id,
                 anunci_id: anun.id
-            }
+            },
+            user_id: user.id,
+            active_token: user.active_token
         }
         assert_equal "201", response.code
         comm = user.reload.comentaris.last
@@ -40,7 +43,7 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
       comm.save
       newtext = "The text was changed";
 
-      put comentari_path(comm.id), params: {
+      put anunci_comentari_path(anun.id,comm.id), params: {
         comentari: {
           text: newtext
         },
@@ -71,7 +74,7 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
       comm.save
       newtext = "The text was changed";
 
-      put comentari_path(comm.id), params: {
+      put anunci_comentari_path(anun.id,comm.id), params: {
         comentari: {
           text: newtext
         },
@@ -100,7 +103,7 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
       anun.reload
       
       
-      delete comentari_path(comm.id), params: {
+      delete anunci_comentari_path(anun.id,comm.id), params: {
         user_id: user.id,
         active_token: user.active_token
       }
@@ -124,7 +127,7 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
       comm.save
       anun.reload
       
-      delete comentari_path(comm.id), params: {
+      delete anunci_comentari_path(anun.id,comm.id), params: {
         user_id: user.id,
         active_token: user.active_token
       }
@@ -139,22 +142,15 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
       user.login
       user.reload
       anun = correct_anunci
-      anun.save
+      #anun.save
       
       get anunci_comentaris_path(anun.id), params: {
         user_id: user.id,
         active_token: user.active_token
       }
+      #p(response.body)
       
       assert_equal "200", response.code
       
     end
-      
-      
-      
-      
-      
-      
-    
-
 end
