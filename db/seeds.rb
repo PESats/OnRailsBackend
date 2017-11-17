@@ -14,13 +14,15 @@
   User.create name: Faker::Name.name, email: Faker::Internet.safe_email, platform_name: ["Facebook", "Google", "Twitter"].sample
 end
 
+r = Random.new
+
 # Create 10 random anuncis per user
 User.all.each do |user|
   10.times do
     user.anuncis.create(  title: Faker::Lorem.sentence, 
                           description: Faker::Lorem.paragraph, 
-                          latitude: Faker::Number.decimal(1, 3), 
-                          longitude: Faker::Number.decimal(1, 3), 
+                          latitude: r.rand(4.3..4.4), 
+                          longitude: r.rand(2.0..2.2), 
                           reward: Faker::Number.number(1) )
   end
 end
