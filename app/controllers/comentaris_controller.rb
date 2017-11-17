@@ -16,10 +16,10 @@ class ComentarisController < ApplicationController
     #p(comentari_params)
     @comentari = @anunci.comentaris.new(comentari_params)
     @comentari.user = @user
-    
+
     if @comentari.save
       #@user.comentaris << @comentari
-      render json: @comentari, status: :created
+      render json: @comentari, root: false, status: :created
     else
       render json: @comentari.errors.full_message, status: 400
     end
@@ -31,7 +31,7 @@ class ComentarisController < ApplicationController
 
   def update
     if @comentari.update_attributes comentari_params
-      render json: @comentari
+      render json: @comentari, root: false
     else
       render json: @comentari.errors.full_messages, status: 400
     end
