@@ -21,7 +21,7 @@ User.all.each do |user|
   10.times do
     user.anuncis.create(  title: Faker::Lorem.sentence, 
                           description: Faker::Lorem.paragraph, 
-                          latitude: r.rand(4.3..4.4), 
+                          latitude: r.rand(41.3..41.4), 
                           longitude: r.rand(2.0..2.2), 
                           reward: Faker::Number.number(1) )
   end
