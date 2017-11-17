@@ -4,21 +4,21 @@ class AnuncisController < ApplicationController
   before_action :find_anunci, only: [:show, :update, :destroy]
   
   def index
-    render json: @anuncis = Anunci.all
+    render json: @anuncis = Anunci.all, root: false
   end
 
   def create
     @anunci = @user.anuncis.new anunci_params
     if @anunci.save
-      render json: @anunci
+      render json: @anunci, root: false
     else
       p @anunci.errors.full_messages
-      render json: @anunci.errors.full_messages, status: 400
+      render json: @anunci.errors.full_messages, status: 400, root: false
     end
   end
 
   def show
-    render json: @anunci
+    render json: @anunci, root: false
   end
 
   def update

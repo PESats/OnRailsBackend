@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update, :destroy, :logout]
 
   def index
-    render json: User.all
+    render json: User.all, root: false
   end
 
   def create
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: @user
+    render json: @user, root: false
   end
 
   #def update
@@ -25,14 +25,14 @@ class UsersController < ApplicationController
     if @user = User.find_by(email: user_params[:email], platform_name: user_params[:platform_name])
       # Login
       @user.login
-      render json: @user
+      render json: @user, root: false
     else
       #create user
       @user = User.new user_params
       if @user.save
-        render json: @user
+        render json: @user, root: false
       else
-        render json: @user.errors.full_messages, status: 400
+        render json: @user.errors.full_messages, status: 400, root: false
       end
     end
   end
