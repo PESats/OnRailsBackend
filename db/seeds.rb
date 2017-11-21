@@ -19,10 +19,11 @@ r = Random.new
 # Create 10 random anuncis per user
 User.all.each do |user|
   10.times do
-    user.anuncis.create(  title: Faker::Lorem.sentence, 
+    anunci = user.anuncis.create( title: Faker::Lorem.sentence, 
                           description: Faker::Lorem.paragraph, 
                           latitude: r.rand(41.3..41.4), 
                           longitude: r.rand(2.0..2.2), 
                           reward: Faker::Number.number(1) )
+    anunci.comentaris.create text: Faker::FamilyGuy.quote, user_id: [user.id - 1, 1].max
   end
 end
