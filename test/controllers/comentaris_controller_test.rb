@@ -146,7 +146,7 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
         user_id: user.id,
         active_token: user.active_token
       }
-       p(response.body)
+      #p(response.body)
       assert_equal '200', response.code
     end
     
