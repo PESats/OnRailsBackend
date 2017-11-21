@@ -3,6 +3,8 @@ class ComentarisController < ApplicationController
   before_action :find_comentari, only: [:show,:update,:destroy]
   before_action :check_owner, only: [:update, :destroy]
 
+  # Refactor pending: El render hardcoded amb el merge hauria d'estar nomes un cop i els altres cridar a show
+
   def index
     #comentaris = Comentari.where('anunci')
     @anunci = Anunci.find(params[:anunci_id])
@@ -19,19 +21,19 @@ class ComentarisController < ApplicationController
 
     if @comentari.save
       #@user.comentaris << @comentari
-      render json: @comentari, root: false, status: :created
+      render json: @comentari.as_json.merge(user: @comentari.user), root: false, status: :created
     else
       render json: @comentari.errors.full_message, status: 400
     end
   end
 
   def show
-    render json: @comentari
+    render json: @comentari.as_json.merge(user: @comentari.user), root: false
   end
 
   def update
     if @comentari.update_attributes comentari_params
-      render json: @comentari, root: false
+      render json: @comentari.as_json.merge(user: @comentari.user), root: false
     else
       render json: @comentari.errors.full_messages, status: 400
     end

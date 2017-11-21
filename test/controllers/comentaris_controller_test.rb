@@ -149,4 +149,17 @@ class ComentarisControllerTest < ActionDispatch::IntegrationTest
       # p(response.body)
       assert_equal '200', response.code
     end
-end
+    
+    test "Show comentar" do
+      comment = correct_comment
+      user = correct_user
+      user.login
+      
+      get comentari_path(comment.id), params: {
+        user_id: user.id,
+        active_token: user.active_token
+      }
+      
+      assert_equal '200', response.code
+    end
+  end
