@@ -8,7 +8,7 @@ class ComentarisController < ApplicationController
   def index
     #comentaris = Comentari.where('anunci')
     @anunci = Anunci.find(params[:anunci_id])
-    render json: @anunci.comentaris.order(:created_at, :updated_at), root: false
+    render json: @anunci.comentaris.order(:created_at, :updated_at), include: :user, root: false
   end
 
   def create
