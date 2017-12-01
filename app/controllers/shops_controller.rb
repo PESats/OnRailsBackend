@@ -8,6 +8,13 @@ class ShopsController < ApplicationController
   end
 
   def create
+    @shop = Shop.new shop_params
+    if @shop.save
+      render json: @shop, root: false
+    else
+      p @shop.errors.full_messages
+      render json: @shop.errors.full_messages, status: 400, root: false
+    end
   end
 
   def show
@@ -24,7 +31,7 @@ class ShopsController < ApplicationController
 ################################################################################
 
   def shop_params
-    params.require(:anunci).permit(:title, :description, :latitude, :longitude, :reward)
+    params.require(:shop).permit(:name, :description, :latitude, :longitude, :user_id)
   end
 
   def find_shop

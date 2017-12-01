@@ -30,21 +30,22 @@ class ShopsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "create shop" do
-    user = correct_user
+    user = users(:two)
     user.login
     user.reload
 
     name = "Dummy name"
     description = "Dummy description"
-    latitude = 2.7
-    longitude = 1.5
+    latitude = 3.1
+    longitude = 4.6
 
     post shops_path, params: {
       shop: {
         name: name,
         description: description,
         latitude: latitude,
-        longitude: longitude
+        longitude: longitude,
+        user_id: user.id
       },
       user_id: user.id, active_token: user.active_token
     }
@@ -52,10 +53,10 @@ class ShopsControllerTest < ActionDispatch::IntegrationTest
     shop = user.reload.shop
 
     assert_equal "200",       response.code
-    assert_equal name,        anunci.name
-    assert_equal description, anunci.description
-    assert_equal latitude,    anunci.latitude
-    assert_equal longitude,   anunci.longitude
+    assert_equal name,        shop.name
+    assert_equal description, shop.description
+    assert_equal latitude,    shop.latitude
+    assert_equal longitude,   shop.longitude
 
   end
 
