@@ -1,29 +1,32 @@
 require 'test_helper'
 
 class ShopsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get shops_index_url
-    assert_response :success
+
+  test "get shop correct token" do
+    shop = correct_shop
+    user = correct_user
+    user.login
+
+    get shop_path(shop.id), params: {
+      user_id: user.id,
+      active_token: user.active_token,
+    }
+
+    assert_equal "200",             response.code
+    assert_match shop.name,         response.body
+    assert_match shop.description,  response.body
   end
 
-  test "should get create" do
-    get shops_create_url
-    assert_response :success
-  end
+  test "get shops index" do
+    user = correct_user
+    user.login
 
-  test "should get show" do
-    get shops_show_url
-    assert_response :success
-  end
+    get shops_path, params: {
+      user_id: user.id,
+      active_token: user.active_token,
+    }
 
-  test "should get update" do
-    get shops_update_url
-    assert_response :success
-  end
-
-  test "should get destroy" do
-    get shops_destroy_url
-    assert_response :success
+    assert_equal "200", response.code
   end
 
 end
