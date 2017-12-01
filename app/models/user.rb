@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :anuncis
   has_many :comentaris
+  has_many :bids
 
   def login
     regenerate_active_token
