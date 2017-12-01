@@ -8,6 +8,13 @@ class ShopTest < ActiveSupport::TestCase
     assert shop.valid?
   end
 
+  test "Shop with valid user" do
+    shop = correct_shop
+    shop.user_id = nil
+
+    assert_not shop.valid?
+  end
+
   test "Shop with non-empty name" do
     shop = correct_shop
     shop.name = ""
