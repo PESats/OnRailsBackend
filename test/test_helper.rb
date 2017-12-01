@@ -19,6 +19,9 @@ class ActiveSupport::TestCase
     anuncis(:one)
   end
 
+  def correct_shop
+    shops(:one)
+  end
 
 
   def correct_comment
