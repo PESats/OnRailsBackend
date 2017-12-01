@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   resources :comentaris, only: [:index,:create,:update,:destroy]
  end
  resources :comentaris
- 
+ resources :shops
+
  post '/users/login/', to: 'users#login'
  post '/users/logout/', to: 'users#logout'
- 
+
  #get '/anuncis/:anunci_id/comentaris', to: 'comentaris#index', as: 'anunci_comentaris'
 
  # en comptes de resources :comentaris, seria millor:
