@@ -9,7 +9,9 @@ class ShopsController < ApplicationController
 
   def create
     @shop = Shop.new shop_params
-    if @shop.save
+    if @user.shop != nil
+      render json: "This user has already a shop", status: 400, root: false
+    elsif @shop.save
       render json: @shop, root: false
     else
       p @shop.errors.full_messages
