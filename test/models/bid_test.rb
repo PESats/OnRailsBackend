@@ -19,7 +19,7 @@ class BidTest < ActiveSupport::TestCase
   end
 
   test "Each pair of user and anunci is unique" do
-    us1 = correct_user
+    us1 = correct_user2
     anun = correct_anunci
     bid_A = Bid.new(user: us1, anunci: anun, amount: 4)
     assert bid_A.save
@@ -30,14 +30,25 @@ class BidTest < ActiveSupport::TestCase
     end
   end
 
+  test "user_id of Bid can't be the same as its Anunci user_id" do
+    us1 = correct_user
+    anun = correct_anunci
+
+    bid_A = Bid.new(user: us1, anunci: anun, amount: 10)
+
+    assert_not bid_A.save
+  end
+
 
   test "Amount of a bid can't be negative" do
-    us1 = correct_user
+    us1 = correct_user2
     anun = correct_anunci
     bid_A = Bid.new(user: us1, anunci: anun, amount: -4)
     assert_not bid_A.save
 
   end
+ 
 
-  
+
+
 end

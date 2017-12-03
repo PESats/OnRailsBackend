@@ -37,4 +37,12 @@ class ActiveSupport::TestCase
     comentaris(:four)
   end
 
+  def correct_bid
+    bids(:one)
+  end
+
+  def correct_bid2
+    bids(:two)
+  end
+
 end

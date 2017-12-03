@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128125305) do
+ActiveRecord::Schema.define(version: 20171203183257) do
 
   create_table "anuncis", force: :cascade do |t|
     t.string "title"
@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 20171128125305) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "open"
+    t.integer "selectedBid_id"
+    t.index ["selectedBid_id"], name: "index_anuncis_on_selectedBid_id"
     t.index ["user_id"], name: "index_anuncis_on_user_id"
   end
 
@@ -30,6 +33,7 @@ ActiveRecord::Schema.define(version: 20171128125305) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "accepted", default: false
     t.index ["anunci_id", "user_id"], name: "index_bids_on_anunci_id_and_user_id", unique: true
     t.index ["anunci_id"], name: "index_bids_on_anunci_id"
     t.index ["user_id"], name: "index_bids_on_user_id"

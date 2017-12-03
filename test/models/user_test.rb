@@ -35,7 +35,8 @@ class UserTest < ActiveSupport::TestCase
     user.logout
     assert_not user.isLoggedIn?
   end
-  
+
+    
   # TODO: User name test
 
 
