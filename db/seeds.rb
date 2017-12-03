@@ -1,13 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-# Per a quan implementem el sistema d'admin
-#admin = User.create name: 'Admin', email: 'admin@example.com', platform_name: 'Google'
+# https://github.com/stympy/faker
 
 # Create 10 random users
 10.times do
@@ -27,3 +18,15 @@ User.all.each do |user|
     anunci.comentaris.create text: Faker::FamilyGuy.quote, user_id: [user.id - 1, 1].max
   end
 end
+
+# Create two shops
+Shop.create(  name: Faker::SiliconValley.company, 
+              description: Faker::SiliconValley.motto, 
+              latitude: r.rand(41.3..41.4), 
+              longitude: r.rand(2.0..2.2), 
+              user_id: User.first.id)
+Shop.create(  name: Faker::SiliconValley.company, 
+              description: Faker::SiliconValley.motto, 
+              latitude: r.rand(41.3..41.4), 
+              longitude: r.rand(2.0..2.2), 
+              user_id: User.last.id)

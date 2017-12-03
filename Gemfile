@@ -17,7 +17,7 @@ gem 'minitest-reporters'
 # UML generator
 gem 'railroady'
 # Fake data
-gem 'faker'
+gem 'faker', github: 'stympy/faker'
 
 group :development, :test do
   gem 'sqlite3'
