@@ -19,13 +19,12 @@ class BidTest < ActiveSupport::TestCase
   end
 
   test "Each pair of user and anunci is unique" do
-    us1 = correct_user2
+    user = correct_user2
     anun = correct_anunci
-    bid_A = Bid.new(user: us1, anunci: anun, amount: 4)
-    assert bid_A.save
-
+    #ja hi ha una bid de user(id=2) a anun(id=1) al fitxer bids.yml
+    
     assert_raise ActiveRecord::RecordNotUnique do
-      bid_B = Bid.new(user: us1, anunci: anun, amount: 7)
+      bid_B = Bid.new(user: user, anunci: anun, amount: 7)
       bid_B.save
     end
   end

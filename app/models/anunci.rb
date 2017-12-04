@@ -19,6 +19,10 @@ class Anunci < ApplicationRecord
     update(selectedBid_id: nil,status: "open")
   end
 
+  def isOpen?
+    status == "open"
+  end
+
 
 
 

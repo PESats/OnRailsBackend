@@ -33,7 +33,8 @@ class AnuncisController < ApplicationController
 
   def destroy
     @anunci.destroy
-  end
+  end 
+
   
   private
 ################################################################################
@@ -49,5 +50,10 @@ class AnuncisController < ApplicationController
   def find_anunci
     @anunci = Anunci.find params[:id]
   end
+
+
+
+
+  
   
 end

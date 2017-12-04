@@ -15,6 +15,10 @@ class ActiveSupport::TestCase
     users(:two)
   end
 
+  def correct_user3
+    users(:three)
+  end
+
   def correct_anunci
     anuncis(:one)
   end

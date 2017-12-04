@@ -48,4 +48,17 @@ class AnunciBidFlowTest < ActionDispatch::IntegrationTest
     assert_equal money_u1-finalPrize, user.reload.coins
     assert_equal money_u2+finalPrize, user2.reload.coins
   end
+
+  test "A user can't create a bid for an Anunci that is closed" do
+    user = correct_user
+    user.login
+    user2 = correct_user3
+    anun = correct_anunci
+    bid_A = correct_bid    
+    user.selectBid(bid_A.id)
+    assert_raises :Exception do
+      user2.bids.create(amount: 30, anunci: anun)
+    end
+  end
+
 end

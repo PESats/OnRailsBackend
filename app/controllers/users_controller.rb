@@ -41,6 +41,40 @@ class UsersController < ApplicationController
     @user.logout
   end
 
+  def contacts
+    current_contacts = []
+    #p(@user.anuncis.where(status: "open"))
+    @user.anuncis.where(status: "closed").select("selectedBid").find_each do |b|
+      current_contacts.push(b.user_id)
+    end
+    render json: current_contacts
+  end
+  
+  def selectBid
+    id_bid = user_bid_params[:bid_id]
+    id_anun = user_bid_params[:anunci_id]
+    @anun = @user.anuncis.find(id_anun)
+    @user.selectBid(id_bid)
+    if @anun.save do
+      render json: @anun.reload.selectedBid
+    else
+      render json: @anun.errors.full_messages, status: 400, root: false
+    end
+  end
+
+  def cancelBid
+    id_anun = user_bid_params[:anunci_id]
+    @user.cancelBid(id_anun)
+    @user.anuncis.save!
+  end
+
+  def confirmTaskCompletion
+    id_anun = user_bid_params[:anunci_id]
+    @user.confirmTaskCompletion(id_anun)
+    @user.anuncis.save!
+  end
+
+
   private
 ################################################################################
 
@@ -48,8 +82,14 @@ class UsersController < ApplicationController
     params.require(:user).permit(:id, :name, :image_url, :platform_name, :email, :active_token)
   end
 
+  def user_bid_params
+    params.require(:bid).permit(:bid_id,:anunci_id)
+  end
+
   def find_user
     @user = User.find(params[:user_id])
   end
+
+  
 
 end

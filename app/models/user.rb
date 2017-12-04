@@ -35,7 +35,7 @@ class User < ApplicationRecord
 
   def cancelBid(anun_id)
     anun = self.anuncis.find(anun_id)
-    p(anun.selectedBid == nil)
+    #p(anun.selectedBid == nil)
     anun.cancelBidSelection()
     anun.save
   end

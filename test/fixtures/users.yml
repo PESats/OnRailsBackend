@@ -13,3 +13,11 @@ two:
   image_url: dummy_man
   platform_name: Google
   email: tutu@example.com
+
+three:
+  id: 3
+  name: TestUser3
+  image_url: dummy_matriz
+  platform_name: Facebook
+  email: romeisgreat@example.com
+
