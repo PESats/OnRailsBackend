@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :bids, only: [:index]  
  end
  resources :comentaris
-
+ resources :shops
  #TODO ruta per BIDS: user/id/bids, anunci/id/bids
  resources :bids
 

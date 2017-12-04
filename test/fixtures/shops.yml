@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Badulake
+  description: Solo klav kalash para bebel sumo de montaña o sumo de cangrejo
+  latitude: 2.6
+  longitude: 9.0
+  user_id: 1
+
+two:
+  name: MyString
+  description: MyText
+  latitude: 1.5
+  longitude: 1.5
