@@ -1,6 +1,6 @@
 class CouponsController < ApplicationController
   
-  before_action :find_shop
+  before_action :find_user
   before_action :find_coupon, only: [:show, :update, :destroy]
   
   def index
@@ -9,7 +9,9 @@ class CouponsController < ApplicationController
 
   def create
     @coupon = Coupon.new coupon_params
-    if @coupon.save
+    if !correct_ownership?
+      render json: "The user must be the owner of the shop", status: 400, root: false
+    elsif @coupon.save
       render json: @coupon, root: false
     else
       p @coupon.errors.full_messages
@@ -38,8 +40,12 @@ class CouponsController < ApplicationController
     @coupon = Coupon.find params[:id]
   end
   
-  def find_shop
+  def find_user
     @user = User.find params[:user_id]
+  end
+  
+  def correct_ownership?
+    @user.shop.id == coupon_params[:shop_id].to_i
   end
   
 end

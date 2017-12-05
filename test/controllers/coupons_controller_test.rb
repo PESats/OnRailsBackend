@@ -29,7 +29,7 @@ class CouponsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "200", response.code
   end
   
-  test "create coupon" do
+  test "create coupon CORRECT shop" do
     user = users(:one)
     user.login
     user.reload
@@ -51,7 +51,26 @@ class CouponsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "200",       response.code
     assert_equal title,       coupon.title
     assert_equal description, coupon.description
+  end
+  
+  test "create coupon NOT owned shop" do
+    user = users(:one)
+    user.login
+    user.reload
 
+    title = "Dummy title"
+    description = "Dummy description"
+
+    post coupons_path, params: {
+      coupon: {
+        title: title,
+        description: description,
+        shop_id: Shop.last.id
+      },
+      user_id: user.id, active_token: user.active_token
+    }
+    
+    assert_equal "400", response.code
   end
 
 end
