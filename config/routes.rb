@@ -9,6 +9,7 @@ Rails.application.routes.draw do
  resources :shops
  #TODO ruta per BIDS: user/id/bids, anunci/id/bids
  resources :bids
+ resources :coupons
 
 
  post '/users/login/', to: 'users#login'
