@@ -8,6 +8,13 @@ class CouponsController < ApplicationController
   end
 
   def create
+    @coupon = Coupon.new coupon_params
+    if @coupon.save
+      render json: @coupon, root: false
+    else
+      p @coupon.errors.full_messages
+      render json: @coupon.errors.full_messages, status: 400, root: false
+    end
   end
 
   def show
