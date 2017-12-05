@@ -26,6 +26,10 @@ class ActiveSupport::TestCase
   def correct_shop
     shops(:one)
   end
+  
+  def correct_coupon
+    coupons(:one)
+  end
 
 
   def correct_comment
