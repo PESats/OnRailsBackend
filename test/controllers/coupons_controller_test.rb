@@ -1,29 +1,20 @@
 require 'test_helper'
 
 class CouponsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get coupons_index_url
-    assert_response :success
-  end
+  
+  test "get coupon correct token" do
+    coupon = correct_coupon
+    user = correct_user
+    user.login
 
-  test "should get create" do
-    get coupons_create_url
-    assert_response :success
-  end
+    get coupon_path(coupon.id), params: {
+      user_id: user.id,
+      active_token: user.active_token
+    }
 
-  test "should get show" do
-    get coupons_show_url
-    assert_response :success
-  end
-
-  test "should get update" do
-    get coupons_update_url
-    assert_response :success
-  end
-
-  test "should get destroy" do
-    get coupons_destroy_url
-    assert_response :success
+    assert_equal "200",               response.code
+    assert_match coupon.title,        response.body
+    assert_match coupon.description,  response.body
   end
 
 end
