@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: @user, root: false
+    render json: @user, include: :shop, root: false
   end
 
   #def update
@@ -25,12 +25,12 @@ class UsersController < ApplicationController
     if @user = User.find_by(email: user_params[:email], platform_name: user_params[:platform_name])
       # Login
       @user.login
-      render json: @user, root: false
+      render json: @user, include: :shop, root: false
     else
       #create user
       @user = User.new user_params
       if @user.save
-        render json: @user, root: false
+        render json: @user, include: :shop, root: false
       else
         render json: @user.errors.full_messages, status: 400, root: false
       end
