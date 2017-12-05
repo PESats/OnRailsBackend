@@ -4,6 +4,7 @@ class CouponsController < ApplicationController
   before_action :find_coupon, only: [:show, :update, :destroy]
   
   def index
+    render json: @coupons = Coupon.all, include: :shop, root: false
   end
 
   def create

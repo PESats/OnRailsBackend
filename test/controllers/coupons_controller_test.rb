@@ -16,5 +16,17 @@ class CouponsControllerTest < ActionDispatch::IntegrationTest
     assert_match coupon.title,        response.body
     assert_match coupon.description,  response.body
   end
+  
+  test "get coupons index" do
+    user = correct_user
+    user.login
+  
+    get coupons_path, params: {
+      user_id: user.id,
+      active_token: user.active_token
+    }
+  
+    assert_equal "200", response.code
+  end
 
 end
