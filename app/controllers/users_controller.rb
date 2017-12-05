@@ -55,7 +55,7 @@ class UsersController < ApplicationController
     id_anun = user_bid_params[:anunci_id]
     @anun = @user.anuncis.find(id_anun)
     @user.selectBid(id_bid)
-    if @anun.save do
+    if @anun.save
       render json: @anun.reload.selectedBid
     else
       render json: @anun.errors.full_messages, status: 400, root: false
