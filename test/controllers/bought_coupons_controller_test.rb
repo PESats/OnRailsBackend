@@ -29,4 +29,16 @@ class BoughtCouponsControllerTest < ActionDispatch::IntegrationTest
     }
   end
   
+  test "delete bought_coupon" do
+    user = users(:one)
+    user.login
+    
+    delete user_bought_coupon_path(user, user.bought_coupons.first.id), params: {
+      user_id: user.id,
+      active_token: user.active_token
+    }
+    
+    assert_equal "204", response.code
+  end
+  
 end
