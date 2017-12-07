@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class AnunciBidFlowTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  
+  # MODEL LEVEL 
 
   test "A user can accept one bid of on of their anuncis" do
 
@@ -11,10 +10,13 @@ class AnunciBidFlowTest < ActionDispatch::IntegrationTest
     user.login
     anun = correct_anunci
     bid_A = correct_bid
-    p(anun.id)
-    p(bid_A)
+    has_selected = anun.reload.selectedBid == nil
+    
+    #p(bid_A)
 
     user.selectBid(bid_A.id)
+    
+    p("status of Anun(user_accept_anuncis): " + has_selected.to_s )
    
     assert_equal "closed", anun.reload.status
     assert bid_A.reload.accepted
@@ -24,13 +26,15 @@ class AnunciBidFlowTest < ActionDispatch::IntegrationTest
     user = correct_user
     user.login
     anun = correct_anunci
+    has_selected = anun.selectedBid == nil 
+    
     bid_A = correct_bid    
-    user.selectBid(bid_A.id)    
+    user.selectBid(bid_A.id)
+    assert_equal "closed", anun.reload.status
+    p("status of Anun(user_cancel_anuncis): " + has_selected.to_s)    
     user.cancelBid(anun.id)
     assert_equal "open", anun.reload.status
     assert_not bid_A.reload.accepted
-
-
   end
 
   test "A user can confirm the completion of the task in the anunci and pay the coins to the bids owner" do
@@ -40,6 +44,7 @@ class AnunciBidFlowTest < ActionDispatch::IntegrationTest
     anun = correct_anunci
     bid_A = correct_bid    
     user.selectBid(bid_A.id)
+    assert_equal "closed", anun.reload.status
     money_u1 = user.coins
     money_u2 = user2.coins
     finalPrize = bid_A.amount
@@ -56,9 +61,8 @@ class AnunciBidFlowTest < ActionDispatch::IntegrationTest
     anun = correct_anunci
     bid_A = correct_bid    
     user.selectBid(bid_A.id)
-    assert_raises :Exception do
-      user2.bids.create(amount: 30, anunci: anun)
-    end
+    assert_equal "closed", anun.reload.status
+    bid_B = user2.bids.new(amount: 30, anunci: anun)
+    assert_not bid_B.save
   end
-
 end

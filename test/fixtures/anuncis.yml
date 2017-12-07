@@ -8,6 +8,7 @@ one:
   longitude: 9.99
   reward: 4
   user_id: 1
+  selectedBid_id: nil
 
 two:
   id: 2
@@ -17,3 +18,4 @@ two:
   longitude: 5.99
   reward: 3
   user_id: 2
+  selectedBid_id: nil

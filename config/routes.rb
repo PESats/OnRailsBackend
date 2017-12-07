@@ -1,23 +1,32 @@
 Rails.application.routes.draw do
 
- resources :users 
+ resources :users do
+    resources :bids, only: [:index,:create,:update,:destroy]
+ end
  resources :anuncis do
   resources :comentaris, only: [:index,:create,:update,:destroy]
-  resources :bids, only: [:index]  
+  resources :bids, only: [:index]    
  end
  resources :comentaris
  resources :shops
+ 
  #TODO ruta per BIDS: user/id/bids, anunci/id/bids
- resources :bids
-
+ #resources :bids
 
  post '/users/login/', to: 'users#login'
  post '/users/logout/', to: 'users#logout'
  get  '/users/contacts', to: 'users#contacts'
+ #get  '/anuncis/:/bids', to: 'bids#index', as: 'anunci_bids_index'
+ #get  '/users/:id/bids', to: 'bids#index', as: 'user_bids_index'
+
+ 
+ #get  'users/:id/acceptedBids', to: 'bids#userAcceptedBidsIndex'
+ #get  'users/:id/selectedBids', to: 'bids#userAnuncisAcceptedBidsIndex'
+ #get  'anuncis/:id/bids'
  #TODO corregir les rutes per acceptar/completar els anuncis
- put  '/users/:id/select', to: 'users#selectBid',as: 'user_bid_select'
- put  '/users/:id/cancel', to: 'users#cancelBidSelection', as: 'user_bid_cancel'
- put  '/users/:id/complete', to: 'users#confirmTaskCompletion', as: 'user_anunci_complete'
+ put  '/users/:user_id/anuncis/:id/select', to: 'anuncis#selectBid',as: 'user_anunci_select'
+ put  '/users/:user_id/anuncis/:id/cancel', to: 'anuncis#cancelBidSelection', as: 'user_anunci_cancel'
+ put  '/users/:user_id/anuncis/:id/complete', to: 'anuncis#confirmCompletion', as: 'user_anunci_complete'
 
  #get '/anuncis/:anunci_id/comentaris', to: 'comentaris#index', as: 'anunci_comentaris'
 

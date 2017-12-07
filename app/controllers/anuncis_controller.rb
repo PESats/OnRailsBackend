@@ -33,14 +33,53 @@ class AnuncisController < ApplicationController
 
   def destroy
     @anunci.destroy
-  end 
+  end
+  
+  def selectBid
+    
+    find_anunci    
+    @bid = @anunci.bids.find(params[:bid_id])
+    @anunci.selectBid(@bid.id)
+    @anunci.status = "closed"
+    if @anunci.save
+      
+      render json: @anunci.selectedBid, root: false, status: :ok
+    else
+      render json: @anunci.errors.full_messages, status: 400
+    end
+  end
+
+  def cancelBidSelection
+    find_anunci
+    @anunci.cancelBidSelection
+    
+    if @anunci.save      
+      render json: {message: "Bid succesfully canceled "}, status: :ok
+    else
+      render json: @anunci.errors.full_messages, status: 400
+    end
+  end
+
+  def confirmCompletion
+    find_anunci
+    #find_user
+    #@bid = selectedBid
+    if @anunci.confirmCompletion
+      render json: {message: "Anunci succesfully completed"}, status: :ok
+    else
+      render json: @anunci.errors.full_messages, status: 400
+    end
+  end
+
+
+
 
   
   private
 ################################################################################
   
   def anunci_params
-    params.require(:anunci).permit(:title, :description, :latitude, :longitude, :reward)
+    params.require(:anunci).permit(:title, :description, :latitude, :longitude, :reward, :selectedBid)
   end
   
   def find_user
@@ -50,6 +89,12 @@ class AnuncisController < ApplicationController
   def find_anunci
     @anunci = Anunci.find params[:id]
   end
+
+  def bid_select_params
+    params.permit(:bid_id)
+  end
+
+  
 
 
 
