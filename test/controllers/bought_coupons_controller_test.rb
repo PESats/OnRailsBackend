@@ -15,9 +15,18 @@ class BoughtCouponsControllerTest < ActionDispatch::IntegrationTest
     user.bought_coupons.each do |coupon|
       assert_match coupon.title,        response.body
       assert_match coupon.description,  response.body
-      assert_match coupon.discount,     response.body
-      assert_match coupon.user_id,      response.body
+      assert_match coupon.discount.to_s,     response.body
     end
+  end
+  
+  test "get bought_coupon" do
+    user = correct_user
+    user.login
+    
+    get user_bought_coupons_path(user), params: {
+      user_id: user.id,
+      active_token: user.active_token
+    }
   end
   
 end

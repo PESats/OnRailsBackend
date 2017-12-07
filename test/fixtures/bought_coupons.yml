@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
-  discount: 1
+  id: 1
+  title: firstTitle
+  description: firstDescription
+  discount: 20
+  user_id: 1
 
 two:
-  title: MyString
-  description: MyText
-  discount: 1
+  id: 2
+  title: dosdos
+  description: twotwo
+  discount: 30
+  user_id: 1
