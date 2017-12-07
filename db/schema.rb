@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171205112430) do
+ActiveRecord::Schema.define(version: 20171207122304) do
 
   create_table "anuncis", force: :cascade do |t|
     t.string "title"
@@ -37,6 +37,16 @@ ActiveRecord::Schema.define(version: 20171205112430) do
     t.index ["anunci_id", "user_id"], name: "index_bids_on_anunci_id_and_user_id", unique: true
     t.index ["anunci_id"], name: "index_bids_on_anunci_id"
     t.index ["user_id"], name: "index_bids_on_user_id"
+  end
+
+  create_table "bought_coupons", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "discount"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_bought_coupons_on_user_id"
   end
 
   create_table "comentaris", force: :cascade do |t|
