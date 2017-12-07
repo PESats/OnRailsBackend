@@ -32,7 +32,6 @@ class CouponsControllerTest < ActionDispatch::IntegrationTest
   test "create coupon CORRECT shop" do
     user = users(:one)
     user.login
-    user.reload
 
     title = "Dummy title"
     description = "Dummy description"
@@ -56,7 +55,6 @@ class CouponsControllerTest < ActionDispatch::IntegrationTest
   test "create coupon NOT owned shop" do
     user = users(:one)
     user.login
-    user.reload
 
     title = "Dummy title"
     description = "Dummy description"
