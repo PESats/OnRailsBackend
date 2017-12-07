@@ -12,6 +12,8 @@ Rails.application.routes.draw do
  
  #TODO ruta per BIDS: user/id/bids, anunci/id/bids
  #resources :bids
+ resources :coupons
+
 
  post '/users/login/', to: 'users#login'
  post '/users/logout/', to: 'users#logout'
