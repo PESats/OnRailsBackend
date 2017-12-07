@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :comentaris
   has_many :bids
   has_one  :shop
+  has_many :bought_coupons
 
   def login
     regenerate_active_token

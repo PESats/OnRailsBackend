@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
  resources :users do
     resources :bids, only: [:index,:create,:update,:destroy]
+    resources :bought_coupons
  end
  resources :anuncis do
   resources :comentaris, only: [:index,:create,:update,:destroy]
