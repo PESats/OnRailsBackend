@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   include ActionController::MimeResponds
 
-  before_action :validate_token, only: [:show, :edit, :update, :destroy, :logout]
+  before_action :validate_token, only: [:show, :index, :edit, :update, :destroy, :logout]
 
   def validate_token
     #p "Validating Token"
