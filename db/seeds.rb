@@ -5,6 +5,9 @@ n_users = 10
 n_anuncis_per_user = 10
 n_shops = 5
 n_coupons_per_shop = 1
+n_bids_per_user= 4
+#num_anun = 0
+#num_users= 0
 
 
 ################################################################################
@@ -25,15 +28,34 @@ end
 
 # Create anuncis per user
 User.all.each do |user|
+  #num_users += 1
+  #p("user #" +num_users.to_s+ " of "+User.all.count.to_s)
+  #num_anun = 0
   n_anuncis_per_user.times do
+    #num_anun += 1 
+    #p("anunci #"+num_anun.to_s+" of user #"+num_users.to_s)
     anunci = user.anuncis.create( title: Faker::Job.title, 
                           description: Faker::HarryPotter.quote, 
                           latitude: randLatitude, 
                           longitude: randLongitude, 
                           reward: Faker::Number.number(1) )
-    anunci.comentaris.create text: Faker::FamilyGuy.quote, user_id: [user.id - 1, 1].max
+    anunci.comentaris.create text: Faker::FamilyGuy.quote, user_id: [user.id - 1, 1].max  
+  end   
+end
+
+User.all.each do |user|
+  other_anuncis = Anunci.where("user_id != ?",user.id)
+  i_bid = 0
+  until user.bids.count == n_bids_per_user do
+    #p("insert new bid")
+    anunci = other_anuncis.sample
+    #p("Anunci.id = "+anunci.id.to_s)
+    if !anunci.bids.exists?(:user_id=>user.id)
+      user.bids.create(amount: Faker::Number.number(1),anunci_id: anunci.id)     
+    end
   end
 end
+
 
 # Create shops
 n_shops.times do
