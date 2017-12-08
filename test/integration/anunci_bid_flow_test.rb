@@ -16,7 +16,7 @@ class AnunciBidFlowTest < ActionDispatch::IntegrationTest
 
     user.selectBid(bid_A.id)
     
-    p("status of Anun(user_accept_anuncis): " + has_selected.to_s )
+    #p("status of Anun(user_accept_anuncis): " + has_selected.to_s )
    
     assert_equal "closed", anun.reload.status
     assert bid_A.reload.accepted
@@ -31,7 +31,7 @@ class AnunciBidFlowTest < ActionDispatch::IntegrationTest
     bid_A = correct_bid    
     user.selectBid(bid_A.id)
     assert_equal "closed", anun.reload.status
-    p("status of Anun(user_cancel_anuncis): " + has_selected.to_s)    
+    #p("status of Anun(user_cancel_anuncis): " + has_selected.to_s)    
     user.cancelBid(anun.id)
     assert_equal "open", anun.reload.status
     assert_not bid_A.reload.accepted

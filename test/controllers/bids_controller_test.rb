@@ -50,7 +50,7 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
     anun = correct_anunci
     bid_A = correct_bid
     assert_equal "open",anun.status
-    p("select bid-> anun.status = "+anun.status)
+    #p("select bid-> anun.status = "+anun.status)
 
 
     put user_anunci_select_path(user.id,anun.id) , params: {
