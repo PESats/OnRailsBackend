@@ -34,6 +34,8 @@ class BoughtCouponsControllerTest < ActionDispatch::IntegrationTest
     user.login
     coupon = Coupon.last
     
+    _initial_coins = user.coins
+    
     post user_bought_coupons_path(user), params: {
       coupon_id: coupon.id,
       user_id: user.id, active_token: user.active_token
@@ -44,9 +46,11 @@ class BoughtCouponsControllerTest < ActionDispatch::IntegrationTest
     # Add bought_coupon to user -> done
     last_coupon = user.reload.bought_coupons.last
     
+    assert_equal "200", response.code
     assert_equal coupon.title, last_coupon.title
     assert_equal coupon.description, last_coupon.description
     assert_equal coupon.discount, last_coupon.discount
+    assert_equal _initial_coins - coupon.price, user.coins
   end
   
   test "delete bought_coupon" do

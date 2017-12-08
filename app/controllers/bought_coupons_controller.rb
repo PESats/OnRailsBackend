@@ -9,11 +9,16 @@ class BoughtCouponsController < ApplicationController
 
   def create
     coupon = Coupon.find(coupon_params[:coupon_id])
-    @coupon = @user.bought_coupons.create(
-      title: coupon.title, 
-      description: coupon.description, 
-      discount: coupon.discount)
-    render json: @coupon, root: false
+    if @user.coins < coupon.price
+      render json: "Not enough money dude", status: 400
+    else
+      @user.update_attribute("coins", @user.coins - coupon.price)
+      @coupon = @user.bought_coupons.create(
+        title: coupon.title, 
+        description: coupon.description, 
+        discount: coupon.discount)
+      render json: @coupon, root: false
+    end
   end
 
   def show
