@@ -9,16 +9,17 @@ class BidsController < ApplicationController
     fil_mode = bid_index_params[:filter_mode]
     @bids = []
     if fil_mode == "accepted"
-      @bids = @user.bids.where(accepted: 'true').order(:created_at, :updated_at)
-    elsif fill_mode == "selected"
-      @bids = @user.anuncis.where(status: "closed").select("selectedBid").order(:created_at, :updated_at)
+      @bids = @user.bids.where(accepted: true).order(:created_at, :updated_at)
+    elsif fil_mode == "selected"
+      aux = @user.anuncis.where(status: "closed").order(:created_at, :updated_at)
+      aux.find_each do |item|
+        @bids.push(item.selectedBid)
+      end
     else      
       render json: {error: "filter_mode must be selected or accepted" }, status: 400 
     end
-    @bids.for_each do |item|
-      item = customBidJSON(item)
-    end
-    render json: @bids, status: :ok
+    #@bids.map {|item| customBidJSON(item)}
+    render json:  @bids.map {|item| customBidJSON(item)}, status: :ok
   end 
 
   def show
@@ -51,7 +52,7 @@ class BidsController < ApplicationController
   end
 
   def destroy
-    @bid.destroy
+   @bid.destroy
   end
 
   #TODO encapsular user i anunci al GET de Bid

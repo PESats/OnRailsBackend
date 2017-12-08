@@ -109,5 +109,42 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "get an user accepted bids" do
+    user = correct_user
+    user.login
+    user2 = correct_user2
+    user2.login
+    anun = correct_anunci
+    bid_A = correct_bid
+    assert_equal "open",anun.status
+    user.selectBid(bid_A.id)
+
+    get user_bids_path(user2.id), params: {
+      filter_mode: "accepted",
+      user_id: user2.id,
+      active_token: user2.active_token
+    }
+    p(response.body)
+    assert_response :success
+  end
+
+  test "get an user selected bids" do
+    user = correct_user
+    user.login    
+    anun = correct_anunci
+    bid_A = correct_bid
+    assert_equal "open",anun.status
+    user.selectBid(bid_A.id)
+
+    get user_bids_path(user.id), params: {
+      filter_mode: "selected",
+      user_id: user.id,
+      active_token: user.active_token
+    }
+    p(response.body)
+    assert_response :success
+  end
+
+
 
 end
