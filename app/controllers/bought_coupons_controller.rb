@@ -8,6 +8,12 @@ class BoughtCouponsController < ApplicationController
   end
 
   def create
+    coupon = Coupon.find(coupon_params[:coupon_id])
+    @coupon = @user.bought_coupons.create(
+      title: coupon.title, 
+      description: coupon.description, 
+      discount: coupon.discount)
+    render json: @coupon, root: false
   end
 
   def show
@@ -29,7 +35,7 @@ class BoughtCouponsController < ApplicationController
 ################################################################################
 
   def coupon_params
-    params.require(:coupon).permit(:title, :description, :shop_id)
+    params.permit(:coupon_id)
   end
   
   def find_coupon

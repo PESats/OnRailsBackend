@@ -29,6 +29,26 @@ class BoughtCouponsControllerTest < ActionDispatch::IntegrationTest
     }
   end
   
+  test "buy coupon" do
+    user = correct_user
+    user.login
+    coupon = Coupon.last
+    
+    post user_bought_coupons_path(user), params: {
+      coupon_id: coupon.id,
+      user_id: user.id, active_token: user.active_token
+    }
+    
+    # Check if user can buy that coupon -> TODO!
+    # Decrease coins -> TODO!
+    # Add bought_coupon to user -> done
+    last_coupon = user.reload.bought_coupons.last
+    
+    assert_equal coupon.title, last_coupon.title
+    assert_equal coupon.description, last_coupon.description
+    assert_equal coupon.discount, last_coupon.discount
+  end
+  
   test "delete bought_coupon" do
     user = users(:one)
     user.login
