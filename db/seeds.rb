@@ -30,3 +30,13 @@ Shop.create(  name: Faker::SiliconValley.company,
               latitude: r.rand(41.3..41.4), 
               longitude: r.rand(2.0..2.2), 
               user_id: User.last.id)
+
+# Add one coupon for each shop
+Shop.all.each do |shop|
+  Shop.coupons.create(
+    title: Faker::Commerce.promotion_code,
+    description: Faker::HowIMetYourMother.quote,
+    price: Faker::Number.between(1, 10),
+    discount: Faker::Number.decimal(2)
+  )
+end
