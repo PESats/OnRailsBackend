@@ -40,7 +40,7 @@ class BoughtCouponsController < ApplicationController
 ################################################################################
 
   def coupon_params
-    params.permit(:coupon_id)
+    params#.permit(:coupon_id)
   end
   
   def find_coupon

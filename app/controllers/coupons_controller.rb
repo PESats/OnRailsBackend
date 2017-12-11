@@ -38,7 +38,7 @@ class CouponsController < ApplicationController
 ################################################################################
 
   def coupon_params
-    params.require(:coupon).permit(:title, :description, :discount, :shop_id)
+    params.require(:coupon).permit(:title, :description, :price, :discount, :shop_id)
   end
   
   def find_coupon
