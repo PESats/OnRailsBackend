@@ -41,9 +41,6 @@ class BoughtCouponsControllerTest < ActionDispatch::IntegrationTest
       user_id: user.id, active_token: user.active_token
     }
     
-    # Check if user can buy that coupon -> TODO!
-    # Decrease coins -> TODO!
-    # Add bought_coupon to user -> done
     last_coupon = user.reload.bought_coupons.last
     
     assert_equal "200", response.code
