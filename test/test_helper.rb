@@ -23,6 +23,10 @@ class ActiveSupport::TestCase
     anuncis(:one)
   end
 
+  def correct_anunci2
+    anuncis(:two)
+  end
+
   def correct_shop
     shops(:one)
   end

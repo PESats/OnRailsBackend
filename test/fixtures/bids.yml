@@ -18,11 +18,7 @@ three:
   user_id: 3
   amount: 33
 
-four:
-  id: 8
-  anunci_id: 2
-  user_id: 3
-  amount: 33
+
 
 
 

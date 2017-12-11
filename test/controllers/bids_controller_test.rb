@@ -1,30 +1,30 @@
 require 'test_helper'
 
 class BidsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  
+  test "create a new bid" do
+    anun = correct_anunci2
+    us1 = correct_user3
+    us1.login
+    #p("Users: "+User.count.to_s)
+    #p("Anuncis: "+Anunci.count.to_s)
+    #p(Bid.find(3))
 
-  # test "create a new bid" do
-  #   anun = correct_anunci
-  #   us1 = correct_user3
-  #   us1.login
-  #   #p("Users: "+User.count.to_s)
-  #   #p("Anuncis: "+Anunci.count.to_s)
-  #   #p(Bid.find(3))
+    bAmount = 300
 
-  #   bAmount = 300
-
-  #   post user_bids_path(us1.id), params: {
-  #     bid: {
-  #       amount: bAmount,
-  #       anunci_id: anun.id
-  #     },
-  #     user_id: us1.id,
-  #     active_token: us1.active_token
-  #   }
-  #   assert_equal "201",response.code
-  # end
+    post user_bids_path(us1.id), params: {
+      bid: {
+        amount: bAmount,
+        anunci_id: anun.id
+      },
+      user_id: us1.id,
+      active_token: us1.active_token
+    }
+    # p("POST "+user_bids_path(us1.id))
+    # p(request.params)
+    # p(response.body)
+    assert_equal "201",response.code
+  end
 
   test "update a bid value" do
     anun = correct_anunci
@@ -40,6 +40,9 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
         user_id: user.id,
         active_token: user.active_token
       }
+      # p("PUT "+user_bid_path(user.id,bid_A.id))
+      # p(request.params)
+      # p(response.body)
       assert_response :success
     end
   end
@@ -58,6 +61,9 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
       user_id: user.id,
       active_token: user.active_token
     }
+    # p("PUT "+user_anunci_select_path(user.id,anun.id))
+    # p(request.params)
+    # p(response.body)
     assert_response :success
     assert_equal "closed",anun.reload.status
     assert bid_A.reload.accepted
@@ -78,6 +84,9 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
       user_id: user.id,
       active_token: user.active_token
     }
+    # p("PUT "+user_anunci_cancel_path(user.id,anun.id))
+    # p(request.params)
+    # p(response.body)
     assert_response :success
     assert_equal "open",anun.reload.status
     assert_not bid_A.reload.accepted
@@ -103,6 +112,9 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
           user_id: user.id,
           active_token: user.active_token
         }
+        # p("PUT "+user_anunci_complete_path(user.id,anun.id))
+        # p(request.params)
+        # p(response.body)
         assert_response :success
         assert_equal "completed",anun.reload.status
       end
@@ -124,7 +136,7 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
       user_id: user2.id,
       active_token: user2.active_token
     }
-    p(response.body)
+    #p(response.body)
     assert_response :success
   end
 
@@ -141,7 +153,7 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
       user_id: user.id,
       active_token: user.active_token
     }
-    p(response.body)
+    #p(response.body)
     assert_response :success
   end
 
