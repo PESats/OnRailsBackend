@@ -15,8 +15,11 @@ class BidsController < ApplicationController
       aux.find_each do |item|
         @bids.push(item.selectedBid)
       end
+    elsif bid_index_params[:anunci_id].present?
+      @anun = Anunci.find(bid_index_params[:anunci_id])
+      @bids = @anun.bids.order(:created_at, :updated_at)
     else      
-      render json: {error: "filter_mode must be selected or accepted" }, status: 400 
+      render json: {error: "filter_mode must be selected or accepted, otherwise it must have anunci_id" }, status: 400 
     end
     #@bids.map {|item| customBidJSON(item)}
     render json:  @bids.map {|item| customBidJSON(item)}, status: :ok
@@ -70,7 +73,7 @@ class BidsController < ApplicationController
   end
 
   def bid_index_params
-    params.permit(:user_id,:filter_mode)
+    params.permit(:user_id,:filter_mode,:anunci_id)
   end
 
   def find_bid
