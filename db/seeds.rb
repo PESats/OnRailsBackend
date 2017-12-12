@@ -2,10 +2,10 @@
 
 ####### SETTINGS #######
 n_users = 10
-n_anuncis_per_user = 5
+n_anuncis_per_user = 2
 n_shops = 5
 n_coupons_per_shop = 1
-n_bids_per_user= 4
+n_bids_per_user = 1
 
 ################################################################################
 def randLatitude
