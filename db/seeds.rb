@@ -47,11 +47,15 @@ User.all.each do |user|
   end
 end
 #fer que tots els anuncis tinguin un bid seleccionat
-# Anunci.all.each do |anun|
-#   bid_id = anun.bids.select("id").sample
-#   anun.selectBid(bid_id.to_i)
-#   anun.save
-# end
+Anunci.all.each do |anun|
+
+  if anun.bids.count > 0
+    bid_id = anun.bids.sample.id
+    p("Bid id: "+bid_id.to_s)
+    anun.selectBid(bid_id)
+    anun.save
+  end
+end
 
 
 # Create shops
