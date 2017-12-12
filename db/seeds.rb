@@ -55,6 +55,12 @@ User.all.each do |user|
     end
   end
 end
+#fer que tots els anuncis tinguin un bid seleccionat
+Anunci.all.each do |anun|
+  bid_id = anun.bids.select("id").sample
+  anun.selectBid(bid_id.to_i)
+  anun.save
+end
 
 
 # Create shops
