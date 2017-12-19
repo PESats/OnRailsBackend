@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class BidsControllerTest < ActionDispatch::IntegrationTest
-  
+
   test "create a new bid" do
     anun = correct_anunci2
     us1 = correct_user3
@@ -67,7 +67,7 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_equal "closed",anun.reload.status
     assert bid_A.reload.accepted
-       
+
   end
 
   test "Cancel Selection" do
@@ -142,7 +142,7 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
 
   test "get an user selected bids" do
     user = correct_user
-    user.login    
+    user.login
     anun = correct_anunci
     bid_A = correct_bid
     assert_equal "open",anun.status
@@ -153,8 +153,8 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
       user_id: user.id,
       active_token: user.active_token
     }
-    p(request.url)
-    p(response.body)
+    #p(request.url)
+    #p(response.body)
     assert_response :success
   end
 
