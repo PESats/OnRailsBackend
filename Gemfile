@@ -19,6 +19,8 @@ gem 'railroady'
 # Fake data
 gem 'faker', github: 'stympy/faker'
 
+gem 'merit', github: "tamycova/merit", branch: 'f657596409d98fc7c8e3274b213b86cc47d87495'
+
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
