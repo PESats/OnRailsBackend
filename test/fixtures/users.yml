@@ -24,3 +24,7 @@ three:
   email: romeisgreat@example.com
   coins: 10
 
+badger:
+  name: Badger
+  platform_name: Facebook
+  email: badger@example.com

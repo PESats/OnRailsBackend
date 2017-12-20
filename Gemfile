@@ -18,7 +18,7 @@ gem 'minitest-reporters'
 gem 'railroady'
 # Fake data
 gem 'faker', github: 'stympy/faker'
-
+# Badges. Necessaria la branch per un error solucionat que no esta a master
 gem 'merit', github: "tamycova/merit", branch: 'f657596409d98fc7c8e3274b213b86cc47d87495'
 
 group :development, :test do

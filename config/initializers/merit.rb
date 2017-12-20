@@ -31,3 +31,15 @@ end
 # }].each do |attrs|
 #   Merit::Badge.create! attrs
 # end
+
+Merit::Badge.create!(
+  id: 1,
+  name: "test-badge",
+  description: "This is a test badge"
+)
+
+Merit::Badge.create!(
+  id: 2,
+  name: "first-badge",
+  description: "Your very first badge!"
+)

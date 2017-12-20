@@ -22,7 +22,19 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     }
     assert_not user.reload.isLoggedIn?
   end
-
   
-
+  test "badge test" do
+    badger = users(:badger)
+    badger.login
+    badger.reload
+    
+    assert_equal 0, Merit::Badge.find(1).users.count
+    
+    get user_path(badger.id), params:{
+      user_id: badger.id, active_token: badger.active_token
+    }
+    
+    assert_not_equal 0, Merit::Badge.find(1).users.count
+  end
+  
 end

@@ -44,6 +44,14 @@ module Merit
       #
       #   user.name.length > 4
       # end
+      
+      grant_on 'users#show', badge_id: 1, to: :itself do |user|
+        #comment.votes.count == 5
+        user.name == "Badger"
+      end
+      
+      #grant_on 'users#show', badge_id: 1, to: :itself
+      
     end
   end
 end
