@@ -3,9 +3,6 @@ Merit.setup do |config|
   # Check rules on each request or in background
   # config.checks_on_each_request = true
 
-  # Define ORM. Could be :active_record (default) and :mongoid
-  # config.orm = :active_record
-
   # Add application observers to get notifications when reputation changes.
   # config.add_observer 'MyObserverClassName'
 
@@ -18,19 +15,6 @@ Merit.setup do |config|
   # is "current_#{user_model_name.downcase}".
   # config.current_user_method = 'current_user'
 end
-
-# Create application badges (uses https://github.com/norman/ambry)
-# badge_id = 0
-# [{
-#   id: (badge_id = badge_id+1),
-#   name: 'just-registered'
-# }, {
-#   id: (badge_id = badge_id+1),
-#   name: 'best-unicorn',
-#   custom_fields: { category: 'fantasy' }
-# }].each do |attrs|
-#   Merit::Badge.create! attrs
-# end
 
 Merit::Badge.create!(
   id: 1,
