@@ -55,7 +55,6 @@ class CouponsController < ApplicationController
   
   # You only exist for convinience
   def current_user
-    p "IN CURRENT_USER coupons"
     @user || find_user
   end
   

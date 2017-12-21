@@ -54,7 +54,7 @@ class BoughtCouponsController < ApplicationController
   
   # You only exist for convinience
   def current_user
-    return @user
+    @user || find_user
   end
 
 end

@@ -5,7 +5,6 @@ class BadgesTest < ActionDispatch::IntegrationTest
   test "test badge" do
     badger = users(:badger)
     badger.login
-    badger.reload
     
     assert_equal 0, Merit::Badge.find(1).users.count
     
@@ -32,7 +31,6 @@ class BadgesTest < ActionDispatch::IntegrationTest
   test "first coupon badge" do
     user = blank_user
     user.login
-    user.reload
     
     assert_equal 0, user.badges.count
     
@@ -43,6 +41,25 @@ class BadgesTest < ActionDispatch::IntegrationTest
     }
     
     assert Merit::Badge.find(6).users.any? {|u| u[:id] == user.id}
+  end
+  
+  test "first anunci badge" do
+    user = blank_user
+    user.login
+    
+    # Create anunci
+    post anuncis_path, params: {
+      anunci: {
+        title: "Dummy title",
+        description: "Dummy description",
+        latitude: 2.7,
+        longitude: 1.5,
+        reward: 5
+      },
+      user_id: user.id, active_token: user.active_token
+    }
+    
+    assert Merit::Badge.find(3).users.any? {|u| u[:id] == user.id}
   end
   
 end
