@@ -47,6 +47,8 @@ class BadgesTest < ActionDispatch::IntegrationTest
     user = blank_user
     user.login
     
+    assert_equal 0, user.badges.count
+    
     # Create anunci
     post anuncis_path, params: {
       anunci: {
