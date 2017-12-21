@@ -22,7 +22,5 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     }
     assert_not user.reload.isLoggedIn?
   end
-
   
-
 end

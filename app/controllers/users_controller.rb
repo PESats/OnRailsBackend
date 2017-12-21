@@ -89,7 +89,10 @@ class UsersController < ApplicationController
   def find_user
     @user = User.find(params[:user_id])
   end
-
   
-
+  # You only exist for convinience
+  def current_user
+    @user || find_user
+  end
+  
 end

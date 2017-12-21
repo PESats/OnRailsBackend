@@ -1,8 +1,8 @@
 class BoughtCouponsController < ApplicationController
-  
+
   before_action :find_user
   before_action :find_coupon, only: [:show, :update, :destroy]
-  
+
   def index
     render json: @coupons = @user.bought_coupons, root: false
   end
@@ -14,10 +14,11 @@ class BoughtCouponsController < ApplicationController
     else
       @user.update_attribute("coins", @user.coins - coupon.price)
       @coupon = @user.bought_coupons.create(
-        title: coupon.title, 
-        description: coupon.description, 
-        discount: coupon.discount)
-      render json: @coupon, root: false
+        title: coupon.title,
+        description: coupon.description,
+        discount: coupon.discount,
+        shop_id: coupon.shop_id)
+      render json: @user, include: :shop, root: false
     end
   end
 
@@ -35,20 +36,20 @@ class BoughtCouponsController < ApplicationController
       render json: "", status: 204
     end
   end
-  
+
  private
 ################################################################################
 
   def coupon_params
     params#.permit(:coupon_id)
   end
-  
+
   def find_coupon
     @coupon = BoughtCoupon.find params[:id]
   end
-  
+
   def find_user
     @user = User.find params[:user_id]
   end
-  
+
 end
