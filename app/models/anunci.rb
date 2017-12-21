@@ -32,14 +32,14 @@ class Anunci < ApplicationRecord
 
   def confirmCompletion
     @bid = selectedBid
-    if @bid != nil
+    if @bid != nil && status == "closed"
       @buyer = User.find(@bid.user_id)
       new_coins_buyer = @buyer.coins + @bid.amount
       new_coins_owner = self.user.coins - @bid.amount
       @buyer.update(coins: new_coins_buyer)
       self.user.update(coins: new_coins_owner)      
-      update(selectedBid_id: nil,status: "completed")
-      self.bids.destroy
+      update(status: "completed")
+      #self.bids.destroy
       true
     else
       self.errors.add(:base, "Can't complete a null selection")
@@ -57,6 +57,10 @@ class Anunci < ApplicationRecord
 
   def isOpen?
     status == "open"
+  end
+
+  def isCompleted?
+    return status == "completed" && selectedBid != nil
   end
 
 

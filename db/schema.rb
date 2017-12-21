@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221154531) do
+ActiveRecord::Schema.define(version: 20171221164058) do
 
   create_table "anuncis", force: :cascade do |t|
     t.string "title"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20171221154531) do
     t.integer "coins", default: 42
     t.integer "sash_id"
     t.integer "level", default: 0
+    t.float "average_evaluation", default: 0.0
     t.index ["id"], name: "index_users_on_id"
     t.index ["platform_name", "email"], name: "index_users_on_platform_name_and_email"
   end
