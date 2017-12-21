@@ -23,9 +23,4 @@ class Evaluation < ApplicationRecord
         end
     end
 
-    
-
-
-
-    end
 end
