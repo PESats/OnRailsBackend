@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211172516) do
+ActiveRecord::Schema.define(version: 20171219114049) do
 
   create_table "anuncis", force: :cascade do |t|
     t.string "title"
@@ -93,6 +93,14 @@ ActiveRecord::Schema.define(version: 20171211172516) do
     t.integer "coins", default: 42
     t.index ["id"], name: "index_users_on_id"
     t.index ["platform_name", "email"], name: "index_users_on_platform_name_and_email"
+  end
+
+  create_table "validations", force: :cascade do |t|
+    t.integer "score", default: 0
+    t.integer "user_id"
+    t.integer "anunci_id"
+    t.index ["anunci_id"], name: "index_validations_on_anunci_id"
+    t.index ["user_id"], name: "index_validations_on_user_id"
   end
 
 end
