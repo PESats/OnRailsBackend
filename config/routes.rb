@@ -3,6 +3,7 @@ Rails.application.routes.draw do
  resources :users do
     resources :bids, only: [:index,:create,:update,:destroy]
     resources :bought_coupons, only: [:index,:show,:create,:destroy]
+    
  end
  resources :anuncis do
   resources :comentaris, only: [:index,:create,:update,:destroy]
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
  #resources :bids
  resources :coupons
 
-
+ post '/users/:id/evaluations', to: 'evaluations#create', as: 'user_evaluate'
  post '/users/login/', to: 'users#login'
  post '/users/logout/', to: 'users#logout'
  get  '/users/contacts', to: 'users#contacts'
