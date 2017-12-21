@@ -1,10 +1,10 @@
 class BoughtCouponsController < ApplicationController
 
   before_action :find_user
-  before_action :find_coupon, only: [:show, :update, :destroy]
+  before_action :find_bought_coupon, only: [:show, :update, :destroy]
 
   def index
-    render json: @coupons = @user.bought_coupons, root: false
+    render json: @bought_coupons = @user.bought_coupons, root: false
   end
 
   def create
@@ -13,7 +13,7 @@ class BoughtCouponsController < ApplicationController
       render json: "Not enough money dude", status: 400
     else
       @user.update_attribute("coins", @user.coins - coupon.price)
-      @coupon = @user.bought_coupons.create(
+      @bought_coupon = @bought_coupon = @user.bought_coupons.create(
         title: coupon.title,
         description: coupon.description,
         discount: coupon.discount,
@@ -23,15 +23,15 @@ class BoughtCouponsController < ApplicationController
   end
 
   def show
-    render json: @coupon, root: false
+    render json: @bought_coupon, root: false
   end
 
   def update
   end
 
   def destroy
-    if !@coupon.destroy
-      render json: "Could not delete the coupon", status: 400
+    if !@bought_coupon.destroy
+      render json: "Could not delete the bought coupon", status: 400
     else
       render json: "", status: 204
     end
@@ -44,12 +44,17 @@ class BoughtCouponsController < ApplicationController
     params#.permit(:coupon_id)
   end
 
-  def find_coupon
-    @coupon = BoughtCoupon.find params[:id]
+  def find_bought_coupon
+    @bought_coupon = BoughtCoupon.find params[:id]
   end
 
   def find_user
     @user = User.find params[:user_id]
+  end
+  
+  # You only exist for convinience
+  def current_user
+    return @user
   end
 
 end

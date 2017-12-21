@@ -53,4 +53,10 @@ class CouponsController < ApplicationController
     @user.shop.id == coupon_params[:shop_id].to_i
   end
   
+  # You only exist for convinience
+  def current_user
+    p "IN CURRENT_USER coupons"
+    @user || find_user
+  end
+  
 end

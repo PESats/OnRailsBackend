@@ -3,9 +3,6 @@ Merit.setup do |config|
   # Check rules on each request or in background
   # config.checks_on_each_request = true
 
-  # Define ORM. Could be :active_record (default) and :mongoid
-  # config.orm = :active_record
-
   # Add application observers to get notifications when reputation changes.
   # config.add_observer 'MyObserverClassName'
 
@@ -19,27 +16,44 @@ Merit.setup do |config|
   # config.current_user_method = 'current_user'
 end
 
-# Create application badges (uses https://github.com/norman/ambry)
-# badge_id = 0
-# [{
-#   id: (badge_id = badge_id+1),
-#   name: 'just-registered'
-# }, {
-#   id: (badge_id = badge_id+1),
-#   name: 'best-unicorn',
-#   custom_fields: { category: 'fantasy' }
-# }].each do |attrs|
-#   Merit::Badge.create! attrs
-# end
-
 Merit::Badge.create!(
   id: 1,
-  name: "test-badge",
+  name: "test",
   description: "This is a test badge"
 )
 
 Merit::Badge.create!(
   id: 2,
-  name: "first-badge",
-  description: "Your very first badge!"
+  name: "welcome",
+  description: "Welcome to AgorApp!"
+)
+
+Merit::Badge.create!(
+  id: 3,
+  name: "first-anunci",
+  description: "El teu primer anunci, felicitats!"
+)
+
+Merit::Badge.create!(
+  id: 4,
+  name: "first-job",
+  description: "La teva primera feina, felicitats!"
+)
+
+Merit::Badge.create!(
+  id: 5,
+  name: "first-bid",
+  description: "La teva primera licitació, felicitats!"
+)
+
+Merit::Badge.create!(
+  id: 6,
+  name: "first-coupon",
+  description: "La teva primera compra, felicitats!"
+)
+
+Merit::Badge.create!(
+  id: 7,
+  name: "first-feedback",
+  description: "La teva primera valoració, felicitats!"
 )
