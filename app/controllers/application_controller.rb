@@ -4,14 +4,12 @@ class ApplicationController < ActionController::API
   before_action :validate_token, only: [:show, :index, :edit, :update, :destroy, :logout]
 
   def validate_token
-    #p "Validating Token"
     token = params[:active_token]
     id = params[:user_id]
     
     if token && User.exists?(id: id, active_token: token)
-      #p "Correct token"
+      # Nothing
     else
-      #p "Invalid token"
       render json: {error: "Invalid token" }, status: 400
     end
   end

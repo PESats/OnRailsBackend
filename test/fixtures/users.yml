@@ -28,3 +28,8 @@ badger:
   name: Badger
   platform_name: Facebook
   email: badger@example.com
+  
+blank:
+  name: Blank
+  platform_name: Facebook
+  email: blank@example.com

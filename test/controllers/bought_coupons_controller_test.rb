@@ -27,6 +27,8 @@ class BoughtCouponsControllerTest < ActionDispatch::IntegrationTest
       user_id: user.id,
       active_token: user.active_token
     }
+    
+    assert_equal "200", response.code
   end
 
   test "buy coupon" do

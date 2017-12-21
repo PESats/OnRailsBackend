@@ -45,12 +45,23 @@ module Merit
       #   user.name.length > 4
       # end
       
-      grant_on 'users#show', badge: "test-badge", to: :itself do |user|
+      # Test badge
+      grant_on 'users#show', badge: "test", to: :itself do |user|
         #comment.votes.count == 5
         user.name == "Badger"
       end
       
-      grant_on 'users#login', badge: "first-badge", to: :itself
+      # Welcome badge
+      grant_on 'users#login', badge: "welcome", to: :itself
+      
+      # First bought coupon
+      grant_on 'bought_coupons#create', badge: "first-coupon", to: :user do |coupon|
+        coupon.user.bought_coupons.count == 1
+      end
+      
+      #grant_on 'anuncis#create', badge: "first-anunci", to: :user do |user|
+      #  user.anuncis.count == 1
+      #end
       
     end
   end
