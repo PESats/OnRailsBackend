@@ -70,10 +70,7 @@ class AnuncisController < ApplicationController
       render json: @anunci.errors.full_messages, status: 400
     end
   end
-
-
-
-
+  
   
   private
 ################################################################################
@@ -93,12 +90,10 @@ class AnuncisController < ApplicationController
   def bid_select_params
     params.permit(:bid_id)
   end
-
   
-
-
-
-
-  
+  # You only exist for convinience
+  def current_user
+    @user || find_user
+  end
   
 end

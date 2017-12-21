@@ -35,9 +35,9 @@ module Merit
         coupon.user.bought_coupons.count == 1
       end
       
-      #grant_on 'anuncis#create', badge: "first-anunci", to: :user do |user|
-      #  user.anuncis.count == 1
-      #end
+      grant_on 'anuncis#create', badge: "first-anunci", to: :user do |anunci|
+        anunci.user.anuncis.count == 1
+      end
       
     end
   end
