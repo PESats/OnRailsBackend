@@ -1,4 +1,4 @@
-class Validation < ApplicationRecord
+class Evaluation < ApplicationRecord
     belongs_to :user    
     belongs_to :anunci
     validates_presence_of :user_id

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
  #resources :bids
  resources :coupons
 
- post '/users/:id/validations', to: 'validations#create', as: 'user_validate_create'
+ post '/users/:id/evaluations', to: 'evaluations#create', as: 'user_evaluate'
  post '/users/login/', to: 'users#login'
  post '/users/logout/', to: 'users#logout'
  get  '/users/contacts', to: 'users#contacts'

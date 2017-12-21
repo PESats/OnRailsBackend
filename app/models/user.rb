@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :bids
   has_one  :shop
   has_many :bought_coupons
-  has_many :validations
+  has_many :evaluations
 
   def login
     regenerate_active_token

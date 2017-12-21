@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220174126) do
+ActiveRecord::Schema.define(version: 20171221154531) do
 
   create_table "anuncis", force: :cascade do |t|
     t.string "title"
@@ -82,6 +82,14 @@ ActiveRecord::Schema.define(version: 20171220174126) do
     t.index ["shop_id"], name: "index_coupons_on_shop_id"
   end
 
+  create_table "evaluations", force: :cascade do |t|
+    t.integer "score", default: 0
+    t.integer "user_id"
+    t.integer "anunci_id"
+    t.index ["anunci_id"], name: "index_evaluations_on_anunci_id"
+    t.index ["user_id"], name: "index_evaluations_on_user_id"
+  end
+
   create_table "merit_actions", force: :cascade do |t|
     t.integer "user_id"
     t.string "action_method"
@@ -146,14 +154,6 @@ ActiveRecord::Schema.define(version: 20171220174126) do
     t.integer "level", default: 0
     t.index ["id"], name: "index_users_on_id"
     t.index ["platform_name", "email"], name: "index_users_on_platform_name_and_email"
-  end
-
-  create_table "validations", force: :cascade do |t|
-    t.integer "score", default: 0
-    t.integer "user_id"
-    t.integer "anunci_id"
-    t.index ["anunci_id"], name: "index_validations_on_anunci_id"
-    t.index ["user_id"], name: "index_validations_on_user_id"
   end
 
 end

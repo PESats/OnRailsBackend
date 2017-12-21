@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class ValidationsControllerTest < ActionDispatch::IntegrationTest
+class EvaluationsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
-  test "create a validation" do
+  test "create a evaluation" do
     user = correct_user
     user.login
     user2 = correct_user2
@@ -17,8 +17,8 @@ class ValidationsControllerTest < ActionDispatch::IntegrationTest
     user.selectBid(bid_A.id)
     user.confirmTaskCompletion(anun.id)
 
-    post user_validate_create_path(user2.id), params: {
-      validation: {
+    post user_evaluate_path(user2.id), params: {
+      evaluation: {
         score: 3,
         user_id: user2.id,
         anunci_id: anun.id
