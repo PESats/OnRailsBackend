@@ -153,8 +153,8 @@ class BidsControllerTest < ActionDispatch::IntegrationTest
       user_id: user.id,
       active_token: user.active_token
     }
-    p(request.url)
-    p(response.body)
+    #p(request.url)
+    #p(response.body)
     assert_response :success
   end
 
