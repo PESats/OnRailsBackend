@@ -27,7 +27,6 @@ class EvaluationsControllerTest < ActionDispatch::IntegrationTest
       active_token: user.active_token
     }
     assert_response :created
-
   end
 
 

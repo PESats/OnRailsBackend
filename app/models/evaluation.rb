@@ -13,7 +13,7 @@ class Evaluation < ApplicationRecord
     end
 
     def anunci_and_target_user_must_be_associated
-        if self.anunci.present?
+        if self.anunci.present? && self.anunci.isCompleted? && self.user.present?
             anunUserID = self.anunci.user_id
             selectedBidUserID = self.anunci.selectedBid.user_id
             self.errors.add(:base,
@@ -21,11 +21,5 @@ class Evaluation < ApplicationRecord
             anunci was completed ") if self.user_id != selectedBidUserID || self.user_id == anunUserID
             
         end
-    end
-
-    
-
-
-
     end
 end
