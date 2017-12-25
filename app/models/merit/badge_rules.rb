@@ -31,7 +31,7 @@ module Merit
       grant_on 'users#login', badge: "welcome", to: :itself
       
       # First bought coupon
-      grant_on 'bought_coupons#create', badge: "first-coupon", to: :user do |coupon|
+      grant_on 'bought_coupons#create', badge: "first-bought-coupon", to: :user do |coupon|
         coupon.user.bought_coupons.count == 1
       end
       

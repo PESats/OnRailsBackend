@@ -48,7 +48,7 @@ Merit::Badge.create!(
 
 Merit::Badge.create!(
   id: 6,
-  name: "first-coupon",
+  name: "first-bought-coupon",
   description: "La teva primera compra, felicitats!"
 )
 
@@ -56,4 +56,10 @@ Merit::Badge.create!(
   id: 7,
   name: "first-feedback",
   description: "La teva primera valoració, felicitats!"
+)
+
+Merit::Badge.create!(
+  id: 8,
+  name: "first-comment",
+  description: "El teu primer comentari, felicitats!"
 )

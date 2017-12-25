@@ -17,6 +17,8 @@ def randLongitude
 end
 ################################################################################
 
+p "Seeding database..."
+
 # Create users
 n_users.times do
   User.create name: Faker::Name.name, email: Faker::Internet.safe_email, platform_name: ["Facebook", "Google", "Twitter"].sample
@@ -36,22 +38,18 @@ end
 
 User.all.each do |user|
   other_anuncis = Anunci.where("user_id != ?",user.id)
-  i_bid = 0
   until user.bids.count == n_bids_per_user do
-    #p("insert new bid")
     anunci = other_anuncis.sample
-    #p("Anunci.id = "+anunci.id.to_s)
     if !anunci.bids.exists?(:user_id=>user.id)
       user.bids.create(amount: Faker::Number.number(1),anunci_id: anunci.id)
     end
   end
 end
+
 #fer que tots els anuncis tinguin un bid seleccionat
 Anunci.all.each do |anun|
-
   if anun.bids.count > 0
     bid_id = anun.bids.sample.id
-    p("Bid id: "+bid_id.to_s)
     anun.selectBid(bid_id)
     anun.save
   end
@@ -79,3 +77,21 @@ Shop.all.each do |shop|
     )
   end
 end
+
+User.all.each do |user|
+  user.add_badge(2)  # Welcome badge
+  if user.anuncis.count > 0
+    user.add_badge(3)  # First anunci badge
+  end
+  if user.comentaris.count > 0
+    user.add_badge(8)  # First comment badge
+  end
+  if user.bids.count > 0
+    user.add_badge(5)  # First bid badge
+  end
+  if user.bought_coupons.count > 0
+    user.add_badge(6)  # First bought coupon badge
+  end
+end
+
+p "Database successfully seeded!"
