@@ -11,7 +11,6 @@ class BadgesControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert_equal "200", response.code
-    p response.body
   end
   
   test "get user badges" do
