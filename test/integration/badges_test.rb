@@ -64,4 +64,22 @@ class BadgesTest < ActionDispatch::IntegrationTest
     assert Merit::Badge.find(3).users.any? {|u| u[:id] == user.id}
   end
   
+  test "first bid badge" do
+    user = blank_user
+    user.login
+    
+    assert_equal 0, user.badges.count
+    
+    # Create bid
+    post user_bids_path(user.id), params: {
+      bid: {
+        amount: 5,
+        anunci_id: Anunci.first.id
+      },
+      user_id: user.id, active_token: user.active_token
+    }
+    
+    assert Merit::Badge.find(5).users.any? {|u| u[:id] == user.id}
+  end
+  
 end
