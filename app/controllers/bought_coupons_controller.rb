@@ -4,12 +4,12 @@ class BoughtCouponsController < ApplicationController
   before_action :find_bought_coupon, only: [:show, :update, :destroy]
 
   def index
-    render json: @bought_coupons = @user.bought_coupons, root: false
+    render json: @bought_coupons = @user.bought_coupons, root: false, include: :shop
   end
 
   def create
     coupon = Coupon.find(coupon_params[:coupon_id])
-    #p "Shop id in controller is: #{coupon.shop_id}"
+    
     if @user.coins < coupon.price
       render json: "Not enough money dude", status: 400
     else
@@ -19,13 +19,12 @@ class BoughtCouponsController < ApplicationController
         description: coupon.description,
         discount: coupon.discount,
         shop_id: coupon.shop_id)
-      #p @bought_coupon
       render json: @user, include: :shop, root: false
     end
   end
 
   def show
-    render json: @bought_coupon, root: false
+    render json: @bought_coupon, include: :shop, root: false
   end
 
   def update

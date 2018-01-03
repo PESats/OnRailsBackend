@@ -17,13 +17,14 @@ class BoughtCouponsControllerTest < ActionDispatch::IntegrationTest
       assert_match coupon.description,    response.body
       assert_match coupon.discount.to_s,  response.body
     end
+    
   end
 
   test "get bought_coupon" do
     user = correct_user
     user.login
 
-    get user_bought_coupons_path(user), params: {
+    get user_bought_coupon_path(user.id, user.bought_coupons.first.id), params: {
       user_id: user.id,
       active_token: user.active_token
     }
