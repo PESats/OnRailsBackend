@@ -9,15 +9,17 @@ class BoughtCouponsController < ApplicationController
 
   def create
     coupon = Coupon.find(coupon_params[:coupon_id])
+    #p "Shop id in controller is: #{coupon.shop_id}"
     if @user.coins < coupon.price
       render json: "Not enough money dude", status: 400
     else
       @user.update_attribute("coins", @user.coins - coupon.price)
-      @bought_coupon = @bought_coupon = @user.bought_coupons.create(
+      @bought_coupon = @user.bought_coupons.create(
         title: coupon.title,
         description: coupon.description,
         discount: coupon.discount,
         shop_id: coupon.shop_id)
+      #p @bought_coupon
       render json: @user, include: :shop, root: false
     end
   end

@@ -6,6 +6,7 @@ one:
   description: firstDescription
   discount: 20
   user_id: 1
+  shop_id: 1
 
 two:
   id: 2
@@ -13,3 +14,4 @@ two:
   description: twotwo
   discount: 30
   user_id: 1
+  shop_id: 2
