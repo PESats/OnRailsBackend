@@ -40,7 +40,7 @@ class BidsController < ApplicationController
     if @bid.save
       render json: @bid, root: false, status: :created
     else
-      render json: @bid.errors.full_message , status: 400
+      render json: @bid.errors.full_messages, status: 400
     end
   end
 
