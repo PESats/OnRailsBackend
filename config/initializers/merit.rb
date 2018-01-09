@@ -19,19 +19,19 @@ end
 Merit::Badge.create!(
   id: 1,
   name: "test",
-  description: "This is a test badge"
+  description: "This is a test badge, no user should have or see it."
 )
 
 Merit::Badge.create!(
   id: 2,
-  name: "welcome",
-  description: "Welcome to AgorApp!"
+  name: "Benvingut!",
+  description: "Has iniciat sessió per primer cop a AgorApp."
 )
 
 Merit::Badge.create!(
   id: 3,
-  name: "first-anunci",
-  description: "El teu primer anunci, felicitats!"
+  name: "Anunciant Novell",
+  description: "Has publicat el teu primer anunci. Felicitats!"
 )
 
 Merit::Badge.create!(
@@ -42,14 +42,14 @@ Merit::Badge.create!(
 
 Merit::Badge.create!(
   id: 5,
-  name: "first-bid",
-  description: "La teva primera licitació, felicitats!"
+  name: "Ganes de Treballar",
+  description: "T'has ofert per primer cop per a realitzar una feina. Felicitats!"
 )
 
 Merit::Badge.create!(
   id: 6,
-  name: "first-bought-coupon",
-  description: "La teva primera compra, felicitats!"
+  name: "Comprador Novell",
+  description: "Has comprat el teu primer cupó. Felicitats!"
 )
 
 Merit::Badge.create!(

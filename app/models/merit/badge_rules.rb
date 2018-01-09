@@ -21,30 +21,30 @@ module Merit
     include Merit::BadgeRulesMethods
 
     def initialize
-      
+
       # Test badge
       grant_on 'users#show', badge: "test", to: :itself do |user|
         user.name == "Badger"
       end
-      
+
       # Welcome badge
-      grant_on 'users#login', badge: "welcome", to: :itself
-      
+      grant_on 'users#login', badge: "Benvingut!", to: :itself
+
       # First bought coupon
-      grant_on 'bought_coupons#create', badge: "first-bought-coupon", to: :user do |coupon|
+      grant_on 'bought_coupons#create', badge: "Comprador Novell", to: :user do |coupon|
         coupon.user.bought_coupons.count == 1
       end
-      
+
       # First anunci
-      grant_on 'anuncis#create', badge: "first-anunci", to: :user do |anunci|
+      grant_on 'anuncis#create', badge: "Anunciant Novell", to: :user do |anunci|
         anunci.user.anuncis.count == 1
       end
-      
+
       # First bid
-      grant_on 'bids#create', badge: "first-bid", to: :user do |bid|
+      grant_on 'bids#create', badge: "Ganes de Treballar", to: :user do |bid|
         bid.user.bids.count == 1
       end
-      
+
     end
   end
 end
