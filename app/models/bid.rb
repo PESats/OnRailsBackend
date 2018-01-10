@@ -17,4 +17,8 @@ class Bid < ApplicationRecord
     self.errors.add(:base, "target_anunci_must_be_open") if self.anunci.present? && !self.anunci.isOpen?
   end
   
+  def owner_name
+    self.anunci.user.name if self.anunci.present?
+  end
+  
 end

@@ -94,8 +94,9 @@ class BidsController < ApplicationController
   end
 
   def customBidJSON(mybid)
-    mybid.as_json include: [:user, :anunci], root: false
+    mybid.as_json include: [:user, :anunci], :methods => :owner_name, root: false
   end
+  
   
   # You only exist for convinience
   def current_user
