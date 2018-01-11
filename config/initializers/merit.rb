@@ -16,11 +16,11 @@ Merit.setup do |config|
   # config.current_user_method = 'current_user'
 end
 
-Merit::Badge.create!(
-  id: 1,
-  name: "test",
-  description: "This is a test badge, no user should have or see it."
-)
+#Merit::Badge.create!(
+#  id: 1,
+#  name: "test",
+#  description: "This is a test badge, no user should have or see it."
+#)
 
 Merit::Badge.create!(
   id: 2,
@@ -34,11 +34,11 @@ Merit::Badge.create!(
   description: "Has publicat el teu primer anunci. Felicitats!"
 )
 
-Merit::Badge.create!(
-  id: 4,
-  name: "first-job",
-  description: "La teva primera feina, felicitats!"
-)
+#Merit::Badge.create!(
+#  id: 4,
+#  name: "first-job",
+#  description: "La teva primera feina, felicitats!"
+#)
 
 Merit::Badge.create!(
   id: 5,
@@ -52,14 +52,32 @@ Merit::Badge.create!(
   description: "Has comprat el teu primer cupó. Felicitats!"
 )
 
+#Merit::Badge.create!(
+#  id: 7,
+#  name: "first-feedback",
+#  description: "La teva primera valoració, felicitats!"
+#)
+
+#Merit::Badge.create!(
+#  id: 8,
+#  name: "first-comment",
+#  description: "El teu primer comentari, felicitats!"
+#)
+
 Merit::Badge.create!(
-  id: 7,
-  name: "first-feedback",
-  description: "La teva primera valoració, felicitats!"
+  id: 9,
+  name: "Comprador Compulsiu",
+  description: "Has comprat 5 cupons. Felicitats!"
 )
 
 Merit::Badge.create!(
-  id: 8,
-  name: "first-comment",
-  description: "El teu primer comentari, felicitats!"
+  id: 10,
+  name: "Treballador Compulsiu",
+  description: "Has realitzat 5 feines. Felicitats!"
+)
+
+Merit::Badge.create!(
+  id: 11,
+  name: "Anunciant Expert",
+  description: "Has publicat 5 anuncis. Felicitats!"
 )

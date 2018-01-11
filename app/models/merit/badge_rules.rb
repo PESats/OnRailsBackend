@@ -22,10 +22,10 @@ module Merit
 
     def initialize
 
-      # Test badge
-      grant_on 'users#show', badge: "test", to: :itself do |user|
-        user.name == "Badger"
-      end
+      ## Test badge
+      #grant_on 'users#show', badge: "test", to: :itself do |user|
+      #  user.name == "Badger"
+      #end
 
       # Welcome badge
       grant_on 'users#login', badge: "Benvingut!", to: :itself
@@ -35,14 +35,29 @@ module Merit
         coupon.user.bought_coupons.count == 1
       end
 
+      # 5 bought coupons
+      grant_on 'bought_coupons#create', badge: "Comprador Compulsiu", to: :user do |coupon|
+        coupon.user.bought_coupons.count == 5
+      end
+
       # First anunci
       grant_on 'anuncis#create', badge: "Anunciant Novell", to: :user do |anunci|
         anunci.user.anuncis.count == 1
       end
 
+      # 5 anuncis
+      grant_on 'anuncis#create', badge: "Anunciant Expert", to: :user do |anunci|
+        anunci.user.anuncis.count == 5
+      end
+
       # First bid
       grant_on 'bids#create', badge: "Ganes de Treballar", to: :user do |bid|
         bid.user.bids.count == 1
+      end
+
+      # 5 bids
+      grant_on 'bids#create', badge: "Treballador Compulsiu", to: :user do |bid|
+        bid.user.bids.count == 5
       end
 
     end
